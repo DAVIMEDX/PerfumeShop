@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from app import routes_cart, routes_user, routes_perfume, \
-models_perfume, models_user, database
-
+from app import database
+from app.routes import cart as routes_cart, user as routes_user, perfume as routes_perfume
+from app.models import perfume as models_perfume, user as models_user
 
 # Cria as tabelas no banco PostgreSQL
 models_perfume.Base.metadata.create_all(bind=database.engine)

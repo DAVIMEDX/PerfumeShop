@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from app import models_cart, models_perfume, models_user, schemas_cart
+from app.models import cart as models_cart, perfume as models_perfume, user as models_user
+from app.schemas import cart as schemas_cart
 from fastapi import HTTPException
 
 

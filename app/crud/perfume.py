@@ -1,27 +1,28 @@
 # app/crud.py
 
 from sqlalchemy.orm import Session
-from app import models_perfume as models, schemas_perfume as schemas
+from app.models import perfume as models_perfume
+from app.schemas import perfume as schemas_perfume 
 from fastapi import HTTPException
 
-def criar_perfume(db: Session, perfume: schemas.PerfumeCreate):
-    novo = models.Perfume(**perfume.model_dump())
+def criar_perfume(db: Session, perfume: schemas_perfume.PerfumeCreate):
+    novo = models_perfume.Perfume(**perfume.model_dump())
     db.add(novo)
     db.commit()
     db.refresh(novo)
     return novo
 
 def listar_perfumes(db: Session):
-    return db.query(models.Perfume).all()
+    return db.query(models_perfume.Perfume).all()
 
 def buscar_perfume(db: Session, perfume_id: int):
-    perfume = db.query(models.Perfume).filter(models.Perfume.id == perfume_id).first()
+    perfume = db.query(models_perfume.Perfume).filter(models_perfume.Perfume.id == perfume_id).first()
     if not perfume:
         raise HTTPException(status_code=404, detail="Perfume não encontrado")
     return perfume
 
-def atualizar_perfume(db: Session, perfume_id: int, dados: schemas.PerfumeCreate):
-    perfume = db.query(models.Perfume).filter(models.Perfume.id == perfume_id).first()
+def atualizar_perfume(db: Session, perfume_id: int, dados: schemas_perfume.PerfumeCreate):
+    perfume = db.query(models_perfume.Perfume).filter(models_perfume.Perfume.id == perfume_id).first()
     if not perfume:
         raise HTTPException(status_code=404, detail="Perfume não encontrado")
 
@@ -37,7 +38,7 @@ def atualizar_perfume(db: Session, perfume_id: int, dados: schemas.PerfumeCreate
     return perfume
 
 def deletar_perfume(db: Session, perfume_id: int):
-    perfume = db.query(models.Perfume).filter(models.Perfume.id == perfume_id).first()
+    perfume = db.query(models_perfume.Perfume).filter(models_perfume.Perfume.id == perfume_id).first()
     if not perfume:
         raise HTTPException(status_code=404, detail="Perfume não encontrado")
     db.delete(perfume)

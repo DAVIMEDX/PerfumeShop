@@ -4,8 +4,10 @@ from jose import JWTError, jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-
-from app import schemas_user, crud_user, database, models_user
+from app.schemas import user as schemas_user
+from app.crud import user as crud_user
+from app import database
+from app.models import user as models_user
 
 # Chave secreta e configurações do token
 SECRET_KEY = "chave_super_secreta_para_token_jwt"  # (dica: usar env em produção)
