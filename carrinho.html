@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrinho - Perfume Shop</title>
+  <link rel="stylesheet" href="catalogo.css" />
+</head>
+<body>
+  <header>
+    <h2>Perfume Shop</h2>
+    <nav>
+      <a href="home.html">Início</a>
+      <a href="catalogo.html">Shop</a>
+      <a href="carrinho.html">Carrinho</a>
+    </nav>
+  </header>
+
+  <section class="catalogo">
+    <h1>Seu Carrinho</h1>
+    <ul id="lista-carrinho"></ul>
+
+    <h2>Finalizar Pedido</h2>
+    <form id="finalizarForm">
+      <label>Endereço:</label>
+      <input type="text" id="endereco" required>
+      <label>Forma de pagamento:</label>
+      <select id="pagamento" required>
+        <option value="">Selecione</option>
+        <option value="cartao">Cartão</option>
+        <option value="pix">Pix</option>
+        <option value="boleto">Boleto</option>
+      </select>
+      <button type="submit" class="btn">Finalizar Pedido</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© Perfume Shop</p>
+  </footer>
+
+  <script>
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const lista = document.getElementById('lista-carrinho');
+    carrinho.forEach((item) => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      lista.appendChild(li);
+    });
+
+    document.getElementById('finalizarForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Pedido finalizado com sucesso!');
+      localStorage.removeItem('carrinho');
+      window.location.href = 'home.html';
+    });
+  </script>
+</body>
+</html>
+
