@@ -38,7 +38,7 @@ nav a {
 }
 
 .hero {
-  background: url('/PerfumeShop/img/banner2.jpg') no-repeat center center;
+  background: url('../img/banner2.jpg') no-repeat center center;
   background-size: cover;
   text-align: center;
   padding: 8rem 2rem;
