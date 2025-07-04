@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Lógica para Login
+  // Lógica para Login (usuário e administrador)
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
     loginForm.addEventListener('submit', (event) => {
@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Por favor, preencha e-mail e senha.');
         return;
       }
+
+      // Login de administrador (RF008)
+      if (email === 'admin@admin.com' && senha === 'admin123') {
+        alert('Login de administrador bem-sucedido!');
+        localStorage.setItem('adminLogado', 'true');
+        window.location.href = 'admin.html';
+        return;
+      }
+
+      // Login de cliente (simulado)
       if (email === 'teste@example.com' && senha === 'senha123') {
         alert('Login realizado com sucesso! (Simulação)');
         localStorage.setItem('userToken', 'simulated_jwt_token');
@@ -38,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Função global para carrinho
+// Função global para adicionar ao carrinho (RF006)
 function adicionarAoCarrinho(nomePerfume) {
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
   carrinho.push(nomePerfume);

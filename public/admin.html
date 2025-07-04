@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Perfume Shop</title>
+  <link rel="stylesheet" href="catalogo.css" />
+</head>
+<body>
+  <header>
+    <h2>Painel do Administrador</h2>
+  </header>
+
+  <section class="catalogo">
+    <h1>Pedidos Recebidos</h1>
+    <ul id="admin-pedidos"></ul>
+  </section>
+
+  <script>
+    const lista = document.getElementById('admin-pedidos');
+    const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+
+    if (pedidos.length === 0) {
+      lista.innerHTML = '<p>Nenhum pedido realizado ainda.</p>';
+    } else {
+      pedidos.forEach((pedido, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>Pedido ${index + 1}</strong><br>
+          Endereço: ${pedido.endereco}<br>
+          Pagamento: ${pedido.pagamento}<br>
+          Status: ${pedido.status}<br>
+          Itens: ${pedido.itens.join(', ')}<hr>
+        `;
+        lista.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
+
