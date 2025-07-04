@@ -21,15 +21,17 @@
 
     <h2>Finalizar Pedido</h2>
     <form id="finalizarForm">
-      <label>Endereço:</label>
+      <label for="endereco">Endereço:</label>
       <input type="text" id="endereco" required>
-      <label>Forma de pagamento:</label>
+
+      <label for="pagamento">Forma de pagamento:</label>
       <select id="pagamento" required>
         <option value="">Selecione</option>
         <option value="cartao">Cartão</option>
         <option value="pix">Pix</option>
         <option value="boleto">Boleto</option>
       </select>
+
       <button type="submit" class="btn">Finalizar Pedido</button>
     </form>
   </section>
@@ -39,19 +41,46 @@
   </footer>
 
   <script>
+    // Exibir carrinho
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const lista = document.getElementById('lista-carrinho');
-    carrinho.forEach((item) => {
-      const li = document.createElement('li');
-      li.textContent = item;
-      lista.appendChild(li);
-    });
+    if (carrinho.length === 0) {
+      lista.innerHTML = "<p>Seu carrinho está vazio.</p>";
+    } else {
+      carrinho.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        lista.appendChild(li);
+      });
+    }
 
+    // Finalizar pedido
     document.getElementById('finalizarForm').addEventListener('submit', function(e) {
       e.preventDefault();
+
+      const endereco = document.getElementById('endereco').value;
+      const pagamento = document.getElementById('pagamento').value;
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+      if (!endereco || !pagamento) {
+        alert('Preencha todos os campos!');
+        return;
+      }
+
+      const pedido = {
+        endereco,
+        pagamento,
+        itens: carrinho,
+        status: 'Pendente'
+      };
+
+      let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+      pedidos.push(pedido);
+      localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
       alert('Pedido finalizado com sucesso!');
       localStorage.removeItem('carrinho');
-      window.location.href = 'home.html';
+      window.location.href = 'meus-pedidos.html';
     });
   </script>
 </body>
