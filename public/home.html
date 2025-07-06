@@ -4,68 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perfume Shop</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="home.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-  <h2>Perfume Shop</h2>
-  <nav>
-    <a href="home.html">Início</a>
-    <a href="catalogo.html">Shop</a>
-    <a href="home.html#servicos">Serviços</a>
-    <a href="home.html#sobre">Quem somos</a>
-    <a href="home.html#contato">Contato</a>
-    <a href="login.html">Login</a>       <!-- Adicione este link -->
-    <a href="cadastro.html">Cadastre-se</a> <!-- Adicione este link -->
-  </nav>
-</header>
+    <h2><a href="/public/home.html">Perfume Shop</a></h2>
+    <nav>
+      <a href="home.html">Início</a>
+      <a href="catalogo.html">Shop</a>
+      <a href="/public/quemsomos.html">Quem somos</a>
+      <a href="/public/contato.html">Contato</a>
+      <a href="login.html">Login</a>      
+      <a href="cadastro.html">Cadastre-se</a> 
+    </nav>
+  </header>
 
   <section class="hero">
     <h1>Perfume Shop</h1>
-    <p>Descubra perfumes e fragrâncias que combinam tradição e inovação. Uma experiência olfativa inesquecível.</p>
-    <button class="btn">Agende agora</button>
+    <p>Explore o universo da perfumaria com fragrâncias que unem tradição, sofisticação e modernidade. Viva uma experiência sensorial única com aromas marcantes e memoráveis.</p>
+    <a href="/public/catalogo.html"><button class="btn">Ver Tudo</button></a>
   </section>
 
   <section class="section" id="sobre">
-    <!-- Caminho da imagem ajustado de /PerfumeShop/img/ para ../img/ -->
-    <img src="../img/midhomepage3.jpg" alt="Perfume" />
+    <img src="/public/img/midhomepage2.jpg" alt="Perfume" />
     <div class="section-text">
-      <h2>Mais sobre nossa marca</h2>
-      <p>Oferecemos perfumes exclusivos selecionados por especialistas. Aromas marcantes, com qualidade e inovação.</p>
+      <h2>Conheça a essência da nossa marca</h2>
+      <p>Na Perfume Shop, cada fragrância é cuidadosamente criada para refletir personalidade, elegância e autenticidade. Nossos perfumes são desenvolvidos por especialistas que unem arte, ciência e paixão para entregar produtos que encantam todos os sentidos. Qualidade, inovação e exclusividade fazem parte do nosso compromisso com você.</p>
       <button class="btn">Saiba mais</button>
     </div>
   </section>
 
   <section class="produtos" id="produtos">
     <h2>Produtos em destaque</h2>
+    <p>Confira toda nossa linha de fragrâncias escolhidas para você</p>
     <div class="produto-lista">
       <div class="produto">
-        <!-- Caminho da imagem ajustado de /PerfumeShop/img/ para ../img/ -->
-        <img src="../img/produto1.jpg" alt="Produto 1">
+        <img src="/public/img/produto1.jpg" alt="Produto 1">
         <h3>Essência do Amor</h3>
-        <p>R$ 65</p>
+        <p>Floral, marcante e romântico</p>
+        <p><strong>R$ 65</strong></p>
       </div>
       <div class="produto">
-        <!-- Caminho da imagem ajustado de /PerfumeShop/img/ para ../img/ -->
-        <img src="../img/produto2.jpg" alt="Produto 2">
+        <img src="/public/img/produto2.jpg" alt="Produto 2">
         <h3>Eau de Prestige</h3>
-        <p>R$ 65</p>
+        <p>Clássico com notas amadeiradas</p>
+        <p><strong>R$ 65</strong></p>
       </div>
       <div class="produto">
-        <!-- Caminho da imagem ajustado de /PerfumeShop/img/ para ../img/ -->
-        <img src="../img/produto3.jpg" alt="Produto 3">
+        <img src="/public/img/produto3.jpg" alt="Produto 3">
         <h3>Conjunto Homem</h3>
-        <p>R$ 65</p>
+        <p>Elegância e intensidade</p>
+        <p><strong>R$ 65</strong></p>
       </div>
       <div class="produto">
-        <!-- Caminho da imagem ajustado de /PerfumeShop/img/ para ../img/ -->
-        <img src="../img/produto4.jpg" alt="Produto 4">
+        <img src="/public/img/produto4.jpg" alt="Produto 4">
         <h3>Eau de toilette</h3>
-        <p>R$ 65</p>
+        <p>Refrescante e casual</p>
+        <p><strong>R$ 65</strong></p>
       </div>
     </div>
-    <button href="catalogo.html" class="btn" style="margin-top: 2rem;">Ver tudo</button>
+    <a href="catalogo.html"><button class="btn" style="margin-top: 2rem;">Ver todos os perfumes</button></a>
   </section>
 
   <footer id="contato">
@@ -86,4 +85,3 @@
   </footer>
 </body>
 </html>
-

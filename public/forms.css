@@ -11,6 +11,16 @@
   min-height: calc(100vh - 10rem);
 }
 
+header h2 a {
+  text-decoration: none;    
+  color: var(--cor-principal); 
+  font-weight: bold;         
+}
+
+header h2 a:hover {
+  color: #000000aa;
+}
+
 .form-container h1 {
   font-family: var(--fonte-titulo);
   font-size: 2.5rem;

@@ -28,17 +28,35 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  font-family: var(--fonte-corpo);
 }
+
+header h2 a {
+  text-decoration: none;    
+  color: var(--cor-principal); 
+  font-weight: bold;         
+}
+
+header h2 a:hover {
+  color: #000000aa;
+}
+
 
 nav a {
   margin: 0 1rem;
   text-decoration: none;
   color: var(--cor-principal);
   font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #000000aa;
+  text-decoration: underline;
 }
 
 .hero {
-  background: url('../img/banner2.jpg') no-repeat center center;
+  background: url('/public/img/banner2.jpg') no-repeat center center;
   background-size: cover;
   text-align: center;
   padding: 8rem 2rem;
@@ -53,7 +71,8 @@ nav a {
 .hero p {
   max-width: 600px;
   margin: 1rem auto;
-  font-size: 20px;
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 .btn {
@@ -75,13 +94,13 @@ nav a {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
-
 .section {
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 4rem 2rem;
   flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .section img {
@@ -91,18 +110,18 @@ nav a {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
-
 .section-text {
   max-width: 600px;  
   padding: 2rem;
   font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .section h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-family: var(--fonte-titulo);
   margin-bottom: 1rem;
 }
-
 
 .produtos {
   text-align: center;
@@ -110,8 +129,14 @@ nav a {
 }
 
 .produtos h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-family: var(--fonte-titulo);
+  margin-bottom: 1rem;
+}
+
+.produtos p {
   margin-bottom: 2rem;
+  font-size: 1rem;
 }
 
 .produto-lista {
@@ -128,11 +153,17 @@ nav a {
   width: 200px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.produto:hover {
+  transform: scale(1.03);
 }
 
 .produto img {
   width: 100%;
   border-radius: 10px;
+  margin-bottom: 0.5rem;
 }
 
 footer {
@@ -142,11 +173,16 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 footer a {
   color: #ccc;
   text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
