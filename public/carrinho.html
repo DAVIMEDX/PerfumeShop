@@ -1,88 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Carrinho - Perfume Shop</title>
-  <link rel="stylesheet" href="catalogo.css" />
-</head>
-<body>
-  <header>
-    <h2>Perfume Shop</h2>
-    <nav>
-      <a href="home.html">Início</a>
-      <a href="catalogo.html">Shop</a>
-      <a href="carrinho.html">Carrinho</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfume Shop - Carrinho</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="carrinho.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <div class="logo">Perfume Shop</div>
+      <nav class="navegacao">
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Servicos</a></li>
+          <li><a href="#">Quem somos</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="acoes-usuario">
+        <a href="#">Login</a>
+        <a href="#" class="destaque">Cadastre-se</a>
+      </div>
+    </header>
 
-  <section class="catalogo">
-    <h1>Seu Carrinho</h1>
-    <ul id="lista-carrinho"></ul>
+    <main class="carrinho-container">
+      <section class="carrinho-produtos">
+        <h2>Produto</h2>
 
-    <h2>Finalizar Pedido</h2>
-    <form id="finalizarForm">
-      <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" required>
+        <div class="produto-carrinho">
+          <img
+            src="https://via.placeholder.com/100x60"
+            alt="Perfume generico"
+          />
+          <div class="info">
+            <strong>Perfume generico</strong>
+            <small>Compra rapida</small>
+          </div>
+          <div class="preco">
+            <s>R$ 249,90</s>
+            <span>R$ 107,90</span>
+          </div>
+        </div>
 
-      <label for="pagamento">Forma de pagamento:</label>
-      <select id="pagamento" required>
-        <option value="">Selecione</option>
-        <option value="cartao">Cartão</option>
-        <option value="pix">Pix</option>
-        <option value="boleto">Boleto</option>
-      </select>
+        <div class="produto-carrinho">
+          <img src="https://via.placeholder.com/100x60" alt="Perfume 2" />
+          <div class="info">
+            <strong>Perfume 2</strong>
+            <small>Compra rapida</small>
+          </div>
+          <div class="preco">
+            <s>R$ 89,00</s>
+            <span>R$ 24,75</span>
+          </div>
+        </div>
 
-      <button type="submit" class="btn">Finalizar Pedido</button>
-    </form>
-  </section>
+        <div class="cupom">
+          <label>Você tem cupons de desconto?</label>
+          <div class="cupom-input-container">
+            <input type="text" id="cupom" placeholder="Cupom" />
+            <button class="btn">Apply</button>
+          </div>
+        </div>
 
-  <footer>
-    <p>© Perfume Shop</p>
-  </footer>
+        <div class="subtotal">
+          <strong>Subtotal</strong>
+          <span>R$ 132,65</span>
+        </div>
 
-  <script>
-    // Exibir carrinho
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    const lista = document.getElementById('lista-carrinho');
-    if (carrinho.length === 0) {
-      lista.innerHTML = "<p>Seu carrinho está vazio.</p>";
-    } else {
-      carrinho.forEach((item) => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        lista.appendChild(li);
-      });
-    }
+        <div class="info-box">
+          <h4>📌 Informações importantes:</h4>
+          <ul>
+            <li>Itens são entregues após 15 dias.</li>
+            <li>Verifique os requisitos antes da compra.</li>
+            <li>Alguns itens possuem limite temporário de compra.</li>
+          </ul>
+        </div>
+      </section>
 
-    // Finalizar pedido
-    document.getElementById('finalizarForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+      <section class="pagamento-metodos">
+        <h2>Métodos de Pagamento</h2>
+        <form class="metodos-pagamento-form">
+          <ul class="lista-metodos-pagamento">
+            <li>
+              <label>
+                <input
+                  type="radio"
+                  name="metodo-pagamento"
+                  value="credito-vista"
+                  checked
+                />
+                <strong>Cartão de Crédito - à vista</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="radio"
+                  name="metodo-pagamento"
+                  value="credito-parcelado"
+                />
+                <strong>Cartão de Crédito - Parcelado</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="metodo-pagamento" value="pix" />
+                <strong>PIX</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="metodo-pagamento" value="paypal" />
+                <strong>PayPal</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="metodo-pagamento" value="picpay" />
+                <strong>PicPay</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="metodo-pagamento" value="boleto" />
+                <strong>Boleto</strong>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="radio" name="metodo-pagamento" value="binance" />
+                <strong>Binance Pay</strong>
+              </label>
+            </li>
+          </ul>
 
-      const endereco = document.getElementById('endereco').value;
-      const pagamento = document.getElementById('pagamento').value;
-      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-
-      if (!endereco || !pagamento) {
-        alert('Preencha todos os campos!');
-        return;
-      }
-
-      const pedido = {
-        endereco,
-        pagamento,
-        itens: carrinho,
-        status: 'Pendente'
-      };
-
-      let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-      pedidos.push(pedido);
-      localStorage.setItem('pedidos', JSON.stringify(pedidos));
-
-      alert('Pedido finalizado com sucesso!');
-      localStorage.removeItem('carrinho');
-      window.location.href = 'meus-pedidos.html';
-    });
-  </script>
-</body>
+          <div class="total-box">
+            <p><strong>Você economizou: </strong>R$ 216,25</p>
+            <h3>Total: R$ 132,65</h3>
+            <button type="submit" class="btn">Finalizar compra</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>
-
