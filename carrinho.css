@@ -1,0 +1,261 @@
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-botao: #223a5e;
+  --cor-fundo: #d4c099;
+  --cor-destaque: #107010;
+  --cor-secundaria-texto: #8d4b4b;
+  --cor-borda: #9d7474;
+  --cor-sombra: rgba(0, 0, 0, 0.1);
+  --fonte-titulo: "Playfair Display", Arial;
+  --fonte-corpo: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  color: var(--cor-principal);
+  background-color: var(--cor-fundo);
+  margin: 0;
+  min-height: 100vh;
+}
+
+.cabecalho {
+  background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px var(--cor-sombra);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cor-principal);
+}
+
+.navegacao ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navegacao a {
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navegacao a:hover {
+  color: var(--cor-botao);
+}
+
+.acoes-usuario {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.acoes-usuario a {
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: 500;
+}
+
+.acoes-usuario .destaque {
+  background-color: var(--cor-botao);
+  color: var(--cor-secundaria);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.acoes-usuario .destaque:hover {
+  background-color: #1a2f4d;
+}
+
+.carrinho-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 4rem 2rem;
+  flex-wrap: wrap;
+}
+
+.carrinho-produtos {
+  flex: 1;
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  min-width: 300px;
+}
+
+.produto-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--cor-borda);
+  padding: 1rem 0;
+}
+
+.produto-carrinho img {
+  width: 100px;
+  border-radius: 5px;
+}
+
+.produto-carrinho .info {
+  flex: 1;
+}
+
+.produto-carrinho .preco {
+  text-align: right;
+}
+
+.produto-carrinho .preco s {
+  font-size: 0.8rem;
+  color: var(--cor-secundaria-texto);
+  display: block;
+}
+
+.produto-carrinho .preco span {
+  font-weight: bold;
+  color: var(--cor-destaque);
+}
+
+.cupom {
+  margin-top: 2rem;
+  font-family: var(--fonte-corpo);
+}
+
+.cupom label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+  color: var(--cor-principal);
+  font-size: 0.95rem;
+}
+
+.cupom-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cupom input {
+  padding: 0.7rem;
+  flex: 1;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  font-family: var(--fonte-corpo);
+  font-size: 0.9rem;
+}
+
+.btn {
+  background-color: var(--cor-botao);
+  color: var(--cor-secundaria);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: var(--fonte-corpo);
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #1a2f4d;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: Arial;
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 1rem;
+  color: var(--cor-principal);
+}
+
+.info-box {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  background-color: var(--cor-secundaria);
+  padding: 1rem;
+  border-left: 5px solid var(--cor-botao);
+  color: var(--cor-principal);
+}
+
+.pagamento-metodos {
+  flex: 1;
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  min-width: 300px;
+}
+
+.metodos-pagamento-form {
+  margin-top: 1rem;
+}
+
+.lista-metodos-pagamento {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-metodos-pagamento li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.lista-metodos-pagamento label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  color: var(--cor-principal);
+}
+
+.lista-metodos-pagamento input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-botao);
+  cursor: pointer;
+}
+
+.lista-metodos-pagamento strong {
+  font-weight: Arial;
+}
+
+.total-box {
+  margin-top: 2rem;
+  background-color: var(--cor-secundaria);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--cor-principal);
+}
+
+.total-box p {
+  color: var(--cor-destaque);
+  font-weight: bold;
+}
+
+.total-box h3 {
+  margin: 0.5rem 0;
+  font-family: var(--fonte-titulo);
+}
+
+.total-box .btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  font-weight: Arial;
+}
