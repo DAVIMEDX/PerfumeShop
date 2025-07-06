@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class PerfumeBase(BaseModel):
     nome: str
@@ -17,3 +18,4 @@ class Perfume(PerfumeBase):
 
     class Config:
        from_attributes = True
+       orm_mode = True 

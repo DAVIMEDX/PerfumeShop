@@ -11,3 +11,4 @@ class Perfume(Base):
     estoque = Column(Integer)
     volume = Column(Integer)
     descricao =  Column(String)
+    imagem_url = Column(String, nullable=True) 
