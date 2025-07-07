@@ -259,3 +259,25 @@ body {
   padding: 0.8rem;
   font-weight: Arial;
 }
+
+/* ✅ NOVO: Estilização dos campos de endereço */
+.metodos-pagamento-form input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+  background-color: var(--cor-secundaria);
+  color: var(--cor-principal);
+  box-sizing: border-box;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.metodos-pagamento-form input[type="text"]:focus {
+  border-color: var(--cor-botao);
+  outline: none;
+  box-shadow: 0 0 5px var(--cor-sombra);
+}
+
