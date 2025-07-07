@@ -4,7 +4,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   const email = document.getElementById('emailLogin').value;
   const senha = document.getElementById('senhaLogin').value;
 
-  // Formato esperado pelo OAuth2PasswordRequestForm: application/x-www-form-urlencoded
   const formData = new URLSearchParams();
   formData.append('username', email);
   formData.append('password', senha);
@@ -21,9 +20,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     if (response.ok) {
       const data = await response.json();
       alert('Login realizado com sucesso!');
-      // Salvar token para futuras requisições protegidas
       localStorage.setItem('token', data.access_token);
-      // Redirecionar para a página principal ou dashboard
       window.location.href = 'home.html';
     } else {
       const error = await response.json();
@@ -33,3 +30,4 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     alert('Erro na requisição: ' + err.message);
   }
 });
+

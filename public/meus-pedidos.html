@@ -2,8 +2,82 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meus Pedidos - Perfume Shop</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="catalogo.css" />
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      background-color: #d4c099;
+      color: #1f1f1f;
+      margin: 0;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h2 {
+      font-family: "Playfair Display", serif;
+      margin: 0;
+    }
+
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: #1f1f1f;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #223a5e;
+    }
+
+    .catalogo {
+      padding: 2rem;
+    }
+
+    .catalogo h1 {
+      font-family: "Playfair Display", serif;
+      margin-bottom: 1.5rem;
+    }
+
+    ul#lista-pedidos {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul#lista-pedidos li {
+      background-color: #ffffff;
+      border: 1px solid #9d7474;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    ul#lista-pedidos li hr {
+      margin-top: 1rem;
+      border: none;
+      border-top: 1px dashed #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-top: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -16,7 +90,7 @@
   </header>
 
   <section class="catalogo">
-    <h1>Meus Pedidos</h1>
+    <h1>📦 Meus Pedidos</h1>
     <ul id="lista-pedidos"></ul>
   </section>
 
@@ -35,11 +109,13 @@
         const li = document.createElement('li');
         li.innerHTML = `
           <strong>Pedido ${index + 1}</strong><br>
-          Endereço: ${pedido.endereco}<br>
-          Pagamento: ${pedido.pagamento}<br>
-          Status: <strong>${pedido.status}</strong><br>
-          Itens: ${pedido.itens.join(', ')}
-          <hr>
+          <strong>Endereço:</strong> ${pedido.endereco || pedido.enderecoCompleto}<br>
+          <strong>Pagamento:</strong> ${pedido.pagamento || pedido.metodoPagamento}<br>
+          <strong>Status:</strong> ${pedido.status || "Processando"}<br>
+          <strong>Itens:</strong><br>
+          <ul>${(pedido.itens || pedido.produtos || []).map(item =>
+            `<li>${item.nome || item} - R$ ${item.preco ? item.preco.toFixed(2) : ""}</li>`
+          ).join('')}</ul>
         `;
         lista.appendChild(li);
       });

@@ -16,6 +16,13 @@
   </section>
 
   <script>
+    // Redireciona se não estiver logado como admin
+    if (localStorage.getItem("adminLogado") !== "true") {
+      alert("Acesso restrito. Faça login como administrador.");
+      window.location.href = "login-admin.html";
+    }
+
+    // Carregar pedidos
     const lista = document.getElementById('admin-pedidos');
     const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
 
