@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Perfume - Admin</title>
+  <link rel="stylesheet" href="catalogo.css" />
+  <link rel="stylesheet" href="forms.css" />
+  <style>
+    .form-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h1 {
+      text-align: center;
+      color: #223a5e;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-group input:invalid,
+    .form-group textarea:invalid {
+      border-color: red;
+      background-color: #ffecec;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #223a5e;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1a2f4d;
+    }
+
+    .mensagem-erro {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Editar Perfume</h1>
+    <div id="mensagemErro" class="mensagem-erro"></div>
+    <form id="formEditarPerfume">
+      <div class="form-group">
+        <label for="nome">Nome do Perfume</label>
+        <input type="text" id="nome" required />
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" rows="4" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="preco">Preço</label>
+        <input type="number" id="preco" step="0.01" required />
+      </div>
+
+      <div class="form-group">
+        <label for="imagem">URL da Imagem</label>
+        <input type="text" id="imagem" required />
+      </div>
+
+      <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
+  </div>
+
+  <script>
+    const index = localStorage.getItem('editandoPerfumeIndex');
+    const perfumes = JSON.parse(localStorage.getItem('perfumes')) || [];
+    const mensagemErro = document.getElementById("mensagemErro");
+
+    if (index === null || !perfumes[index]) {
+      mensagemErro.textContent = "Perfume não encontrado. Redirecionando...";
+      setTimeout(() => {
+        window.location.href = "gerenciar-perfumes.html";
+      }, 2000);
+      document.getElementById('formEditarPerfume').style.display = 'none';
+    } else {
+      const perfume = perfumes[index];
+      document.getElementById('nome').value = perfume.nome;
+      document.getElementById('descricao').value = perfume.descricao;
+      document.getElementById('preco').value = perfume.preco;
+      document.getElementById('imagem').value = perfume.imagem;
+
+      document.getElementById('formEditarPerfume').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Validação extra
+        const nome = document.getElementById('nome').value.trim();
+        const descricao = document.getElementById('descricao').value.trim();
+        const preco = parseFloat(document.getElementById('preco').value);
+        const imagem = document.getElementById('imagem').value.trim();
+
+        if (!nome || !descricao || !preco || !imagem) {
+          mensagemErro.textContent = "Preencha todos os campos corretamente.";
+          return;
+        }
+
+        perfume.nome = nome;
+        perfume.descricao = descricao;
+        perfume.preco = preco;
+        perfume.imagem = imagem;
+
+        perfumes[index] = perfume;
+        localStorage.setItem('perfumes', JSON.stringify(perfumes));
+
+        alert("Perfume atualizado com sucesso!");
+        window.location.href = "gerenciar-perfumes.html";
+      });
+    }
+  </script>
+</body>
+</html>
+
