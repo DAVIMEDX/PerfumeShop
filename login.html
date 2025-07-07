@@ -6,7 +6,7 @@
   <title>Login - Perfume Shop</title>
   <link rel="stylesheet" href="catalogo.css" />
   <link rel="stylesheet" href="forms.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet" />
 </head>
 <body>
   <header>
@@ -27,15 +27,23 @@
     <form id="loginForm">
       <div class="form-group">
         <label for="emailLogin">E-mail:</label>
-        <input type="email" id="emailLogin" name="email" required>
+        <input type="email" id="emailLogin" name="email" required />
       </div>
       <div class="form-group">
         <label for="senhaLogin">Senha:</label>
-        <input type="password" id="senhaLogin" name="senha" required>
+        <input type="password" id="senhaLogin" name="senha" required />
       </div>
       <button type="submit" class="btn">Entrar</button>
+
+      <div class="form-footer-links">
+        <p class="form-link admin-link">
+          É administrador? <a href="login-admin.html">Acesse aqui</a>
+        </p>
+        <p class="form-link cadastro-link">
+          Não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a>
+        </p>
+      </div>
     </form>
-    <p class="form-link">Não tem uma conta? <a href="cadastro.html">Cadastre-se aqui</a></p>
   </section>
 
   <footer>
@@ -46,17 +54,16 @@
     </div>
     <div>
       <h4>Localização</h4>
-      <p>Rua Fulano, 123<br>Quixadá - CE</p>
+      <p>Rua Fulano, 123<br />Quixadá - CE</p>
     </div>
     <div>
       <h4>Redes Sociais</h4>
-      <a href="#">Instagram</a><br>
+      <a href="#">Instagram</a><br />
       <a href="#">Facebook</a>
     </div>
   </footer>
 
-  <script src="/js/login.js"></script>
-
+  <script src="login.js"></script>
 </body>
 </html>
 
