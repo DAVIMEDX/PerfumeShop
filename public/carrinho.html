@@ -15,16 +15,16 @@
       <div class="logo">Perfume Shop</div>
       <nav class="navegacao">
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Shop</a></li>
-          <li><a href="#">Servicos</a></li>
-          <li><a href="#">Quem somos</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="home.html">Inicio</a></li>
+          <li><a href="catalogo.html">Shop</a></li>
+          <li><a href="home.html#servicos">Serviços</a></li>
+          <li><a href="home.html#sobre">Quem somos</a></li>
+          <li><a href="home.html#contato">Contato</a></li>
         </ul>
       </nav>
       <div class="acoes-usuario">
-        <a href="#">Login</a>
-        <a href="#" class="destaque">Cadastre-se</a>
+        <a href="login.html">Login</a>
+        <a href="cadastro.html" class="destaque">Cadastre-se</a>
       </div>
     </header>
 
@@ -33,13 +33,10 @@
         <h2>Produto</h2>
 
         <div class="produto-carrinho">
-          <img
-            src="https://via.placeholder.com/100x60"
-            alt="Perfume generico"
-          />
+          <img src="https://via.placeholder.com/100x60" alt="Perfume 1" />
           <div class="info">
-            <strong>Perfume generico</strong>
-            <small>Compra rapida</small>
+            <strong>Perfume Genérico</strong>
+            <small>Compra rápida</small>
           </div>
           <div class="preco">
             <s>R$ 249,90</s>
@@ -51,7 +48,7 @@
           <img src="https://via.placeholder.com/100x60" alt="Perfume 2" />
           <div class="info">
             <strong>Perfume 2</strong>
-            <small>Compra rapida</small>
+            <small>Compra rápida</small>
           </div>
           <div class="preco">
             <s>R$ 89,00</s>
@@ -63,7 +60,7 @@
           <label>Você tem cupons de desconto?</label>
           <div class="cupom-input-container">
             <input type="text" id="cupom" placeholder="Cupom" />
-            <button class="btn">Apply</button>
+            <button class="btn">Aplicar</button>
           </div>
         </div>
 
@@ -83,59 +80,23 @@
       </section>
 
       <section class="pagamento-metodos">
-        <h2>Métodos de Pagamento</h2>
-        <form class="metodos-pagamento-form">
+        <h2>Finalizar Pedido</h2>
+        <form class="metodos-pagamento-form" id="formFinalizarPedido">
+          <h3>Endereço de Entrega</h3>
+          <input type="text" id="endereco" placeholder="Rua, Número, Bairro" required />
+          <input type="text" id="cidade" placeholder="Cidade" required />
+          <input type="text" id="cep" placeholder="CEP" required />
+
+          <h3>Método de Pagamento</h3>
           <ul class="lista-metodos-pagamento">
             <li>
-              <label>
-                <input
-                  type="radio"
-                  name="metodo-pagamento"
-                  value="credito-vista"
-                  checked
-                />
-                <strong>Cartão de Crédito - à vista</strong>
-              </label>
+              <label><input type="radio" name="metodo-pagamento" value="credito" checked /> Cartão de Crédito</label>
             </li>
             <li>
-              <label>
-                <input
-                  type="radio"
-                  name="metodo-pagamento"
-                  value="credito-parcelado"
-                />
-                <strong>Cartão de Crédito - Parcelado</strong>
-              </label>
+              <label><input type="radio" name="metodo-pagamento" value="pix" /> PIX</label>
             </li>
             <li>
-              <label>
-                <input type="radio" name="metodo-pagamento" value="pix" />
-                <strong>PIX</strong>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="metodo-pagamento" value="paypal" />
-                <strong>PayPal</strong>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="metodo-pagamento" value="picpay" />
-                <strong>PicPay</strong>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="metodo-pagamento" value="boleto" />
-                <strong>Boleto</strong>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="radio" name="metodo-pagamento" value="binance" />
-                <strong>Binance Pay</strong>
-              </label>
+              <label><input type="radio" name="metodo-pagamento" value="boleto" /> Boleto</label>
             </li>
           </ul>
 
@@ -147,5 +108,8 @@
         </form>
       </section>
     </main>
+
+    <script src="js/carrinho.js"></script>
   </body>
 </html>
+
