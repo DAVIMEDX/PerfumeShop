@@ -6,8 +6,9 @@ class PerfumeBase(BaseModel):
     marca: str
     preco: float
     estoque: int
-    volume: int
+    volume: str
     descricao: str
+    imagem_url: str
 
 
 class PerfumeCreate(PerfumeBase):

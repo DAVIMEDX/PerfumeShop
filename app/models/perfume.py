@@ -9,6 +9,6 @@ class Perfume(Base):
     marca = Column(String)
     preco = Column(Float)
     estoque = Column(Integer)
-    volume = Column(Integer)
+    volume = Column(String)
     descricao =  Column(String)
     imagem_url = Column(String, nullable=True) 
