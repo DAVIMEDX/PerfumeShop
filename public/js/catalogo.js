@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const card = document.createElement('div');
       card.className = 'produto';
       card.innerHTML = `
-        <img src="${perfume.imagem_url || 'img/'}" alt="${perfume.nome}">
+        <img src="${perfume.imagem_url}" alt="${perfume.nome}">
         <h3>${perfume.nome}</h3>
         <p>R$ ${perfume.preco}</p>
         <button class="btn" onclick="window.location.href='detalhes.html?id=${perfume.id}'">Ver detalhes</button>

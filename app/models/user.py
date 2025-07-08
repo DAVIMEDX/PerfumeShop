@@ -12,3 +12,5 @@ class Usuario(Base):
     is_admin = Column(Boolean, default=False)
     carrinho = relationship("Carrinho", back_populates="usuario",uselist=False)
     pedidos = relationship("Pedido", back_populates="usuario")
+
+from app.models.pedido import Pedido
