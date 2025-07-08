@@ -1,0 +1,31 @@
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, DateTime
+from sqlalchemy.orm import relationship
+from datetime import datetime
+from app.database import Base
+
+class Pedido(Base):
+    __tablename__ = "pedidos"
+
+    id = Column(Integer, primary_key=True, index=True)
+    usuario_id = Column(Integer, ForeignKey("usuarios.id"))
+    endereco = Column(String)
+    cidade = Column(String)
+    cep = Column(String)
+    metodo_pagamento = Column(String)
+    total = Column(Float)
+    criado_em = Column(DateTime, default=datetime.utcnow)
+
+    usuario = relationship("Usuario", back_populates="pedidos")
+    itens = relationship("ItemPedido", back_populates="pedido", cascade="all, delete-orphan")
+
+class ItemPedido(Base):
+    __tablename__ = "itens_pedido"
+
+    id = Column(Integer, primary_key=True, index=True)
+    pedido_id = Column(Integer, ForeignKey("pedidos.id"))
+    perfume_id = Column(Integer, ForeignKey("perfumes.id"))
+    quantidade = Column(Integer)
+    preco_unitario = Column(Float)
+
+    pedido = relationship("Pedido", back_populates="itens")
+    perfume = relationship("Perfume")

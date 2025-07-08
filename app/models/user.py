@@ -11,3 +11,4 @@ class Usuario(Base):
     senha = Column(String, nullable=False)
     is_admin = Column(Boolean, default=False)
     carrinho = relationship("Carrinho", back_populates="usuario",uselist=False)
+    pedidos = relationship("Pedido", back_populates="usuario")
