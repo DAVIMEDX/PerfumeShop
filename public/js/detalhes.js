@@ -1,4 +1,4 @@
-// detalhes.js
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
@@ -17,14 +17,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const perfume = await response.json();
 
-    section.innerHTML = `
-      <h1>${perfume.nome}</h1>
-      <img src="${perfume.imagem_url}" alt="${perfume.nome}" style="max-width:300px;">
-      <p>Preço: R$ ${perfume.preco}</p>
-      <p>Descrição: ${perfume.descricao}</p>
+   section.innerHTML = `
+  <h1>${perfume.nome}</h1>
+  <div class="detalhes-container">
+    <div class="detalhes-imagem">
+      <img src="${perfume.imagem_url}" alt="${perfume.nome}">
+    </div>
+    <div class="detalhes-info">
+      <p class="preco">R$ ${perfume.preco.toFixed(2)}</p>
+      <p class="descricao"><strong>Descrição:</strong> ${perfume.descricao}</p>
       <button class="btn" id="btn-adicionar">Adicionar ao carrinho</button>
-    `;
-
+    </div>
+  </div>
+`;
     document.getElementById('btn-adicionar').addEventListener('click', () => {
       adicionarAoCarrinho(perfume.id);
     });
@@ -38,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 function adicionarAoCarrinho(perfumeId) {
   const token = localStorage.getItem('token'); 
+  console.log('Token:', token); 
 
   if (!token) {
     alert('Você precisa estar logado para adicionar ao carrinho.');

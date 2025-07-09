@@ -1,0 +1,144 @@
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-destaque: #d4c099;
+  --cor-botao: #223A5E;
+  --fonte-titulo: 'Playfair Display', serif;
+  --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-destaque);
+  color: var(--cor-principal);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background: linear-gradient(to right, #fff, #d4c099);
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Seção principal */
+.catalogo {
+  flex: 1;
+  max-width: 1000px;
+  margin: 4rem auto;
+  background-color: var(--cor-secundaria);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Título */
+.catalogo h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.preco {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #b12704;
+  margin-bottom: 1rem;
+}
+
+.descricao {
+  text-align: justify;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+
+/* Layout em duas colunas */
+.detalhes-container {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Imagem à esquerda */
+.detalhes-imagem img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Info à direita */
+.detalhes-info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.detalhes-info p {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  color: #444;
+}
+
+/* Botão */
+.btn {
+  background-color: var(--cor-botao);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0f2542;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+  background-color: #222;
+  color: white;
+  padding: 2rem 4rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .detalhes-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detalhes-imagem img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .catalogo {
+    padding: 2rem;
+  }
+}

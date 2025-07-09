@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const produtosContainer = document.getElementById('produtos-carrinho');
+  const produtosContainer = document.querySelector('.carrinho-produtos');
   const subtotalEl = document.getElementById('subtotal');
   const descontoEl = document.getElementById('desconto');
   const totalEl = document.getElementById('total');
@@ -11,50 +11,98 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  try {
-    const response = await fetch('http://localhost:8000/carrinho/itens', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  async function carregarCarrinho() {
+    try {
+      const response = await fetch('http://localhost:8000/carrinho/itens', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-    if (!response.ok) throw new Error('Erro ao buscar itens do carrinho');
+      if (!response.ok) throw new Error('Erro ao buscar itens do carrinho');
+      const itens = await response.json();
 
-    const itens = await response.json();
-    let subtotal = 0;
-    produtosContainer.innerHTML = '';
+      let subtotal = 0;
+      const listaContainer = document.getElementById('produtos-carrinho');
+      listaContainer.innerHTML = '';
 
-    itens.forEach(item => {
-      const precoTotal = item.perfume.preco * item.quantidade;
-      subtotal += precoTotal;
+      itens.forEach(item => {
+        const precoTotal = item.perfume.preco * item.quantidade;
+        subtotal += precoTotal;
+        const precoComDesconto = precoTotal * 0.95;
 
-      const card = document.createElement('div');
-      card.className = 'produto-carrinho';
-      card.innerHTML = `
-        <img src="${item.perfume.imagem_url}" alt="${item.perfume.nome}" />
-        <div class="info">
-          <strong>${item.perfume.nome}</strong>
-          <small>${item.quantidade} unidade(s)</small>
-        </div>
-        <div class="preco">
-          <s>R$ ${precoTotal.toFixed(2)}</s>
-          <span>R$ ${(precoTotal * 0.95).toFixed(2)}</span>
-        </div>
-      `;
-      produtosContainer.appendChild(card);
-    });
+        const card = document.createElement('div');
+        card.className = 'produto-carrinho';
+        card.innerHTML = `
+          <img src="${item.perfume.imagem_url}" alt="${item.perfume.nome}" />
+          <div class="info">
+            <strong>${item.perfume.nome}</strong><br>
+            <label>Qtd: <input type="number" min="1" value="${item.quantidade}" data-id="${item.id}" class="input-quantidade" /></label>
+            <button class="btn btn-remover" data-id="${item.id}">Remover</button>
+          </div>
+          <div class="preco">
+            <s>R$ ${precoTotal.toFixed(2)}</s>
+            <span>R$ ${precoComDesconto.toFixed(2)}</span>
+          </div>
+        `;
+        listaContainer.appendChild(card);
+      });
 
-    const desconto = subtotal * 0.05;
-    const total = subtotal - desconto;
+      const desconto = subtotal * 0.05;
+      const total = subtotal - desconto;
 
-    subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
-    descontoEl.textContent = `R$ ${desconto.toFixed(2)}`;
-    totalEl.textContent = `R$ ${total.toFixed(2)}`;
+      subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
+      descontoEl.textContent = `R$ ${desconto.toFixed(2)}`;
+      totalEl.textContent = `R$ ${total.toFixed(2)}`;
 
-  } catch (error) {
-    console.error(error);
-    produtosContainer.innerHTML = '<p>Erro ao carregar carrinho.</p>';
+      adicionarEventos();
+    } catch (error) {
+      console.error(error);
+      produtosContainer.innerHTML = '<p>Erro ao carregar carrinho.</p>';
+    }
   }
+
+  function adicionarEventos() {
+    document.querySelectorAll('.btn-remover').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const itemId = btn.getAttribute('data-id');
+        try {
+          const res = await fetch(`http://localhost:8000/carrinho/${itemId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          if (!res.ok) throw new Error('Erro ao remover item');
+          await carregarCarrinho();
+        } catch (err) {
+          alert('Erro ao remover item');
+        }
+      });
+    });
+
+    document.querySelectorAll('.input-quantidade').forEach(input => {
+      input.addEventListener('change', async () => {
+        const itemId = input.getAttribute('data-id');
+        const novaQuantidade = parseInt(input.value);
+        if (novaQuantidade < 1) return;
+
+        try {
+          const res = await fetch(`http://localhost:8000/carrinho/adicionar`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ perfume_id: parseInt(itemId), quantidade: novaQuantidade })
+          });
+
+          if (!res.ok) throw new Error('Erro ao atualizar quantidade');
+          await carregarCarrinho();
+        } catch (err) {
+          alert('Erro ao atualizar quantidade');
+        }
+      });
+    });
+  }
+
+  await carregarCarrinho();
 
   const form = document.getElementById('formFinalizarPedido');
   form.addEventListener('submit', async e => {
@@ -66,9 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
       const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+        headers: { Authorization: `Bearer ${token}` }
       });
 
       if (!respCarrinho.ok) throw new Error('Erro ao buscar itens do carrinho');

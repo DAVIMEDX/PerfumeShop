@@ -10,7 +10,15 @@ class PerfumeBase(BaseModel):
     descricao: str
     imagem_url: str
 
+class PerfumeOut(BaseModel):
+    id: int
+    nome: str
+    preco: float
+    imagem_url: Optional[str] = None
 
+    class Config:
+        from_attributes = True
+        
 class PerfumeCreate(PerfumeBase):
     pass
 

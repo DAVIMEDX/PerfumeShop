@@ -7,6 +7,8 @@ from app.crud import cart as crud_cart
 from app.core.auth import get_current_user
 from app.models.user import Usuario
 
+
+
 router = APIRouter()
 
 
@@ -43,3 +45,5 @@ def remover_item_do_carrinho(
     usuario: Usuario = Depends(get_current_user),
 ):
     return crud_cart.remover_item(db, usuario.id, item_id)
+
+
