@@ -106,9 +106,13 @@ body {
 }
 
 .produto-carrinho img {
-  width: 100px;
-  border-radius: 5px;
+  width: 80px;             
+  height: 80px;
+  object-fit: cover;      
+  border-radius: 8px;      
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
+
 
 .produto-carrinho .info {
   flex: 1;
@@ -129,32 +133,7 @@ body {
   color: var(--cor-destaque);
 }
 
-.cupom {
-  margin-top: 2rem;
-  font-family: var(--fonte-corpo);
-}
 
-.cupom label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: normal;
-  color: var(--cor-principal);
-  font-size: 0.95rem;
-}
-
-.cupom-input-container {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.cupom input {
-  padding: 0.7rem;
-  flex: 1;
-  border: 1px solid var(--cor-borda);
-  border-radius: 20px;
-  font-family: var(--fonte-corpo);
-  font-size: 0.9rem;
-}
 
 .btn {
   background-color: var(--cor-botao);
@@ -281,3 +260,57 @@ body {
   box-shadow: 0 0 5px var(--cor-sombra);
 }
 
+.desconto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--cor-destaque);
+  font-weight: bold;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--cor-principal);
+  border-top: 2px solid var(--cor-borda);
+  padding-top: 1rem;
+}
+.input-quantidade {
+  width: 60px;
+  padding: 0.4rem;
+  margin-top: 0.4rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-principal);
+  text-align: center;
+}
+
+.input-quantidade:focus {
+  outline: none;
+  border-color: var(--cor-botao);
+  box-shadow: 0 0 5px var(--cor-sombra);
+}
+
+.btn-remover {
+  margin-top: 0.5rem;
+  display: inline-block;
+  background-color: #b42e2e;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-remover:hover {
+  background-color: #911f1f;
+}
