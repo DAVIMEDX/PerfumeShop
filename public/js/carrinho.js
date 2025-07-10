@@ -19,11 +19,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (!response.ok) throw new Error('Erro ao buscar itens do carrinho');
       const itens = await response.json();
+     
 
       let subtotal = 0;
       const listaContainer = document.getElementById('produtos-carrinho');
       listaContainer.innerHTML = '';
-
+      itens.sort((a, b) => a.id - b.id);
       itens.forEach(item => {
         const precoTotal = item.perfume.preco * item.quantidade;
         subtotal += precoTotal;
@@ -52,6 +53,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
       descontoEl.textContent = `R$ ${desconto.toFixed(2)}`;
       totalEl.textContent = `R$ ${total.toFixed(2)}`;
+      
+      const economiaEl = document.getElementById('valor-economia');
+      const totalFinalEl = document.getElementById('total-final');
+
+      economiaEl.textContent = `R$ ${desconto.toFixed(2)}`;
+      totalFinalEl.textContent = `R$ ${total.toFixed(2)}`;
 
       adicionarEventos();
     } catch (error) {
@@ -84,14 +91,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (novaQuantidade < 1) return;
 
         try {
-          const res = await fetch(`http://localhost:8000/carrinho/adicionar`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({ perfume_id: parseInt(itemId), quantidade: novaQuantidade })
-          });
+          const res = await fetch(`http://localhost:8000/carrinho/${itemId}`, {
+          method: 'PATCH',
+          headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+              },
+            body: JSON.stringify({ quantidade: novaQuantidade })
+        });
+
 
           if (!res.ok) throw new Error('Erro ao atualizar quantidade');
           await carregarCarrinho();

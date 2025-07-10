@@ -32,3 +32,7 @@ class PerfumeOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class AtualizarQuantidade(BaseModel):
+    quantidade: int

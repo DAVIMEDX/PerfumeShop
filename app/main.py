@@ -4,7 +4,7 @@ from app import database
 from app.routes import cart as routes_cart, user as routes_user, perfume as routes_perfume
 from app.models import perfume as models_perfume, user as models_user
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.routes import pedido
 
 # Cria as tabelas no banco PostgreSQL
 models_perfume.Base.metadata.create_all(bind=database.engine)
@@ -29,5 +29,5 @@ app.add_middleware(
 app.include_router(routes_perfume.router,tags=["Perfume"])
 app.include_router(routes_user.router,tags=["Usuário"])
 app.include_router(routes_cart.router,tags=["Carrinho"])
-
+app.include_router(pedido.router)
 

@@ -3,6 +3,8 @@ from app.models import cart as models_cart, perfume as models_perfume, user as m
 from app.schemas import cart as schemas_cart
 from fastapi import HTTPException
 from sqlalchemy.orm import joinedload
+from app.models.cart import ItemCarrinho, Carrinho
+
 
 # --------------------------------------
 # Criar um carrinho para um novo usuário
@@ -93,3 +95,21 @@ def remover_item(db: Session, usuario_id: int, item_id: int):
     db.commit()
     return {"mensagem": "Item removido com sucesso"}
 
+def atualizar_quantidade(db: Session, usuario_id: int, item_id: int, nova_quantidade: int):
+    item = (
+        db.query(ItemCarrinho)
+        .join(Carrinho)
+        .filter(
+            ItemCarrinho.id == item_id,
+            Carrinho.usuario_id == usuario_id
+        )
+        .first()
+    )
+
+    if not item:
+        raise HTTPException(status_code=404, detail="Item não encontrado no carrinho.")
+
+    item.quantidade = nova_quantidade
+    db.commit()
+    db.refresh(item)
+    return item

@@ -6,6 +6,10 @@ from app.schemas import cart as schemas_cart
 from app.crud import cart as crud_cart
 from app.core.auth import get_current_user
 from app.models.user import Usuario
+from app.database import get_db
+
+
+
 
 
 
@@ -47,3 +51,15 @@ def remover_item_do_carrinho(
     return crud_cart.remover_item(db, usuario.id, item_id)
 
 
+# ------------------------------
+# Atualizar quantidade do item do carrinho
+# ------------------------------
+
+@router.patch("/carrinho/{item_id}", response_model=schemas_cart.ItemCarrinho)
+def atualizar_quantidade(
+    item_id: int,
+    dados: schemas_cart.AtualizarQuantidade,
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(get_current_user)
+):
+    return crud_cart.atualizar_quantidade(db, usuario.id, item_id, dados.quantidade)
