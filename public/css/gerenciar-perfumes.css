@@ -1,0 +1,143 @@
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-botao: #223a5e;
+  --cor-fundo: #d4c099;
+  --cor-destaque: #107010;
+  --cor-borda: #9d7474;
+  --cor-sombra: rgba(0, 0, 0, 0.1);
+  --fonte-titulo: "Playfair Display", Arial;
+  --fonte-corpo: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  margin: 0;
+  background-color: var(--cor-fundo);
+  color: var(--cor-principal);
+}
+
+header {
+  background-color: var(--cor-secundaria);
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px var(--cor-sombra);
+}
+
+header h2 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  color: var(--cor-principal);
+}
+
+.catalogo {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  display: flex;
+  flex-direction: column;
+}
+
+.catalogo h1 {
+  color: var(--cor-botao);
+  font-family: var(--fonte-titulo);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.perfume-card {
+  border: 1px solid var(--cor-borda);
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  background-color: var(--cor-secundaria);
+  box-shadow: 0 3px 8px var(--cor-sombra);
+  transition: transform 0.2s;
+  font-size: 0.9rem;
+}
+
+.perfume-card:hover {
+  transform: translateY(-3px);
+}
+
+.perfume-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+  color: var(--cor-botao);
+  font-size: 1.2rem;
+  font-family: var(--fonte-titulo);
+}
+
+.perfume-card p {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
+  color: var(--cor-principal);
+}
+
+.btn-group {
+  margin-top: 0.7rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--cor-secundaria);
+  font-size: 0.85rem;
+  font-family: var(--fonte-corpo);
+  transition: background-color 0.3s;
+}
+
+.btn-editar {
+  background-color: var(--cor-botao);
+}
+
+.btn-editar:hover {
+  background-color: #1a2f4d;
+}
+
+.btn-remover {
+  background-color: #d9534f;
+}
+
+.btn-remover:hover {
+  background-color: #b3393b;
+}
+
+.btn-link {
+  background-color: var(--cor-botao);
+  color: var(--cor-secundaria);
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: var(--fonte-corpo);
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin: 1.5rem auto 0 auto;
+  display: block;
+  max-width: 250px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  background-color: #1a2f4d;
+}
+
+@media (max-width: 600px) {
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+  }
+}
