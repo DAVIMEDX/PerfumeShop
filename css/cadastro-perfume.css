@@ -1,0 +1,94 @@
+:root {
+  --cor-fundo: #d4c099;
+  --cor-principal: #1f1f1f;
+  --cor-botao: #223a5e;
+  --cor-destaque: #107010;
+  --fonte-titulo: "Playfair Display", serif;
+  --fonte-corpo: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  margin: 0;
+  padding: 0 2rem;
+  background-color: var(--cor-fundo);
+  color: var(--cor-principal);
+}
+
+header {
+  background-color: var(--cor-secundaria, #fff);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  color: var(--cor-principal);
+}
+
+header h2 {
+  margin: 0;
+  color: var(--cor-botao);
+  font-family: var(--fonte-titulo);
+}
+
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: var(--cor-secundaria, #fff);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-family: var(--fonte-titulo);
+  text-align: center;
+  color: var(--cor-botao);
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.3rem;
+  margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"],
+textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button,
+.btn-voltar {
+  margin-top: 1.5rem;
+  background-color: var(--cor-botao);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn-voltar:hover {
+  background-color: #1a2f4d;
+}
+
+#mensagem {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: var(--cor-destaque);
+  text-align: center;
+}
