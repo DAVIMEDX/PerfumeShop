@@ -45,8 +45,8 @@ header {
 
 header h2 {
   font-family: var(--fonte-titulo);
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.6rem; /* Reduzido de 1.8rem para título menor */
+  font-weight: 600; /* Reduzido de 700 para menos peso */
   color: var(--cor-principal);
 }
 
@@ -69,13 +69,13 @@ nav a:hover {
 
 /* Estilo do formulário */
 .form-container {
-  max-width: 400px; /* Mesmo tamanho compacto do cadastro.css */
+  max-width: 400px;
   margin: 1.5rem auto;
   padding: 1.5rem;
   background: var(--cor-secundaria);
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #4a2c6b; /* Borda roxa para diferenciar do login de usuário */
+  border-top: 4px solid var(--cor-botao); /* Borda azul, consistente com login.css */
 }
 
 .form-container h1 {
@@ -120,7 +120,7 @@ nav a:hover {
   background-color: var(--cor-botao);
   color: white;
   border: none;
-  border-radius: 5px; /* Consistente com cadastro.css */
+  border-radius: 5px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
