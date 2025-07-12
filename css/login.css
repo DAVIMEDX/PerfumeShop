@@ -61,7 +61,7 @@ nav a:hover {
 
 .form-container {
   max-width: 450px;
-  margin: 3rem auto;
+  margin: 1.5rem auto; /* Reduzido */
   padding: 2rem;
   background: var(--cor-secundaria);
   border-radius: 8px;
@@ -149,7 +149,7 @@ nav a:hover {
 footer {
   background-color: #333;
   color: white;
-  padding: 2.5rem 2rem;
+  padding: 1rem 2rem; /* Reduzido */
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -162,15 +162,17 @@ footer div {
   min-width: 200px;
 }
 
+/* Redução de margens internas dos elementos do rodapé */
+footer h4,
+footer p,
+footer a {
+  margin: 0.25rem 0;
+}
+
 footer h4 {
   font-family: var(--fonte-titulo);
   font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: white; /* corrigido para branco */
-}
-
-footer p {
-  margin-bottom: 0.5rem;
+  color: white;
 }
 
 footer a {
@@ -197,13 +199,13 @@ footer a:hover {
   }
 
   .form-container {
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
     padding: 1.5rem;
   }
 
   footer {
     flex-direction: column;
-    padding: 2rem 1rem;
+    padding: 1rem 1rem;
     text-align: center;
   }
 }
