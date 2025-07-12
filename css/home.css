@@ -37,11 +37,7 @@ nav a {
   font-weight: bold;
 }
 
-/* Foco acessível para links e botões */
-a:focus, button:focus {
-  outline: 3px solid var(--cor-botao);
-  outline-offset: 2px;
-}
+/* FOCO PADRÃO DO NAVEGADOR (sem alterações) */
 
 .hero {
   background: url('../img/banner2.jpg') no-repeat center center;
@@ -59,7 +55,7 @@ a:focus, button:focus {
 .hero p {
   max-width: 600px;
   margin: 1rem auto;
-  font-size: 1.25rem; /* usa rem equivalente */
+  font-size: 1.25rem;
 }
 
 .btn {
@@ -130,7 +126,7 @@ a:focus, button:focus {
   background-color: white;
   padding: 1rem;
   border-radius: 10px;
-  width: 12.5rem; /* 200px em rem */
+  width: 12.5rem;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -142,8 +138,6 @@ a:focus, button:focus {
   display: block;
   border-radius: 10px;
 }
-
-/* === RODAPÉ AJUSTADO E MELHORADO === */
 
 footer {
   background-color: #333;
@@ -169,8 +163,6 @@ footer p, footer a {
   color: #ccc;
   text-decoration: none;
 }
-
-/* === MEDIA QUERIES PARA RESPONSIVIDADE MELHORADA === */
 
 @media (max-width: 768px) {
   header {
