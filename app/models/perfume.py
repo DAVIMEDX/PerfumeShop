@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float
 from app.database import Base
+from sqlalchemy.orm import relationship  
 
 class Perfume(Base):
     __tablename__ = "perfumes"
@@ -12,3 +13,4 @@ class Perfume(Base):
     volume = Column(String)
     descricao =  Column(String)
     imagem_url = Column(String, nullable=True) 
+    avaliacoes = relationship("Avaliacao", back_populates="perfume", cascade="all, delete")

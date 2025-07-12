@@ -10,7 +10,7 @@ def get_db():
         db.close()
 
 # String de conexão PostgreSQL
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:medx4@localhost:5432/Projeto_ES"
+SQLALCHEMY_DATABASE_URL = "postgresql://cj:pwd123@localhost/loja_perfume"
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)

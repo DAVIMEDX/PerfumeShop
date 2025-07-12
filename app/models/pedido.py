@@ -15,8 +15,14 @@ class Pedido(Base):
     total = Column(Float)
     criado_em = Column(DateTime, default=datetime.utcnow)
 
+    # 🔽 Campos adicionados para integração com PIX
+    status = Column(String, default="pendente")                   # Ex: pendente, pago, cancelado
+    pix_id = Column(String, nullable=True)                        # ID de pagamento do Mercado Pago
+    qr_code_base64 = Column(String, nullable=True)                # QR Code do Pix em imagem base64
+
     usuario = relationship("Usuario", back_populates="pedidos")
     itens = relationship("ItemPedido", back_populates="pedido", cascade="all, delete-orphan")
+
 
 class ItemPedido(Base):
     __tablename__ = "itens_pedido"

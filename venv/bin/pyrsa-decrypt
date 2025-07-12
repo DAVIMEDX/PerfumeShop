@@ -1,4 +1,4 @@
-#!/home/medx/Documentos/PerfumeShop/venv/bin/python3
+#!/home/jordan/Documentos/Semestres/9_Semestre/Engenharia_de_Software/PerfumeShop/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
