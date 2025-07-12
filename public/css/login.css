@@ -73,8 +73,9 @@ nav a:hover {
   font-family: var(--fonte-titulo);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--cor-botao);
+  color: var(--cor-principal);
   text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
@@ -165,7 +166,7 @@ footer h4 {
   font-family: var(--fonte-titulo);
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #d4c099;
+  color: white; /* corrigido para branco */
 }
 
 footer p {
@@ -206,3 +207,4 @@ footer a:hover {
     text-align: center;
   }
 }
+
