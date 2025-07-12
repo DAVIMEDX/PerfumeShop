@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfume Shop - Avaliações</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="avaliacao.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <div class="logo">Perfume Shop</div>
+      <nav class="navegacao">
+        <ul>
+          <li><a href="#">Início</a></li>
+          <li><a href="#">Produtos</a></li>
+          <li><a href="#">Sobre Nós</a></li>
+          <li><a href="#">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="acoes-usuario">
+        <a href="#" class="login">Login</a>
+        <a href="#" class="destaque">Cadastre-se</a>
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+      <section class="secao-produto">
+        <div class="detalhes-produto">
+          <img
+            src="https://via.placeholder.com/400"
+            alt="Perfume Essence"
+            class="imagem-produto"
+          />
+          <div class="info-produto">
+            <h1 class="titulo-produto">Perfume Essence</h1>
+            <p class="descricao-produto">
+              Fragrância exclusiva com notas de jasmim, baunilha e âmbar.
+              Duração de até 12 horas. Ideal para ocasiões especiais.
+            </p>
+            <div class="avaliacao-geral">
+              <div class="estrelas-avaliacao">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>☆</span>
+              </div>
+              <span class="contagem-avaliacoes">(42 avaliações)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="formulario-avaliacao">
+          <h2 class="titulo-secao">Deixe sua avaliação</h2>
+          <form id="formAvaliacao">
+            <div class="grupo-formulario">
+              <label for="nomeUsuario">Seu nome:</label>
+              <input type="text" id="nomeUsuario" required />
+            </div>
+
+            <div class="grupo-formulario">
+              <label>Sua avaliação:</label>
+              <div class="selecao-estrelas" id="selecaoEstrelas">
+                <span class="estrela-avaliacao" data-valor="1">☆</span>
+                <span class="estrela-avaliacao" data-valor="2">☆</span>
+                <span class="estrela-avaliacao" data-valor="3">☆</span>
+                <span class="estrela-avaliacao" data-valor="4">☆</span>
+                <span class="estrela-avaliacao" data-valor="5">☆</span>
+              </div>
+              <input type="hidden" id="valorAvaliacao" value="0" />
+            </div>
+
+            <div class="grupo-formulario">
+              <label for="comentarioUsuario">Seu comentário:</label>
+              <textarea id="comentarioUsuario" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="botao-primario">
+              Enviar Avaliação
+            </button>
+          </form>
+        </div>
+
+        <div class="lista-avaliacoes">
+          <h2 class="titulo-secao">Avaliações dos clientes</h2>
+          <div id="containerAvaliacoes">
+            <!-- Avaliações serão inseridas aqui via JavaScript -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="avaliacao.js"></script>
+  </body>
+</html>
