@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Seleção de estrelas
-  const estrelas = document.querySelectorAll(
-    "#selecaoEstrelas .estrela-avaliacao"
-  );
+  const estrelas = document.querySelectorAll("#selecaoEstrelas .estrela-avaliacao");
   const ratingInput = document.getElementById("valorAvaliacao");
+  const formAvaliacao = document.getElementById("formAvaliacao");
+  const containerAvaliacoes = document.getElementById("containerAvaliacoes");
+  const perfumeId = new URLSearchParams(window.location.search).get("id");
+  const token = localStorage.getItem("token");
 
+  // Seleção visual de estrelas
   estrelas.forEach((estrela) => {
     estrela.addEventListener("click", function () {
       const valor = parseInt(this.getAttribute("data-valor"));
@@ -24,131 +26,136 @@ document.addEventListener("DOMContentLoaded", function () {
     estrela.addEventListener("mouseover", function () {
       const valor = parseInt(this.getAttribute("data-valor"));
       estrelas.forEach((e, index) => {
-        if (index < valor) {
-          e.textContent = "★";
-        } else {
-          e.textContent = "☆";
-        }
+        e.textContent = index < valor ? "★" : "☆";
       });
     });
 
     estrela.addEventListener("mouseout", function () {
       const valorAtual = parseInt(ratingInput.value);
       estrelas.forEach((e, index) => {
-        if (index < valorAtual) {
-          e.textContent = "★";
-        } else {
-          e.textContent = "☆";
-        }
+        e.textContent = index < valorAtual ? "★" : "☆";
       });
     });
   });
 
-  const formAvaliacao = document.getElementById("formAvaliacao");
-  const containerAvaliacoes = document.getElementById("containerAvaliacoes");
-
-  formAvaliacao.addEventListener("submit", function (e) {
+  // Envia avaliação para o backend
+  formAvaliacao.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const nome = document.getElementById("nomeUsuario").value.trim();
-    const comentario = document
-      .getElementById("comentarioUsuario")
-      .value.trim();
-    const rating = ratingInput.value;
+    const comentario = document.getElementById("comentarioUsuario").value.trim();
+    const nota = parseInt(ratingInput.value);
 
-    if (!nome || !comentario) {
-      alert("Por favor, preencha todos os campos.");
+    if (!comentario || nota === 0) {
+      alert("Por favor, preencha o comentário e selecione uma nota.");
       return;
     }
 
-    if (rating === "0") {
-      alert("Por favor, selecione uma classificação com as estrelas.");
-      return;
+    try {
+      const response = await fetch("http://localhost:8000/avaliacoes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          comentario,
+          nota,
+          perfume_id: parseInt(perfumeId),
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao enviar avaliação.");
+
+      await response.json();
+      await carregarAvaliacoes();
+      await carregarMediaAvaliacao();
+
+      formAvaliacao.reset();
+      ratingInput.value = "0";
+      estrelas.forEach((e) => {
+        e.classList.remove("ativa");
+        e.textContent = "☆";
+      });
+
+      const btnEnviar = formAvaliacao.querySelector("button");
+      const textoOriginal = btnEnviar.textContent;
+      btnEnviar.textContent = "Obrigado! ✓";
+      btnEnviar.style.backgroundColor = "#107010";
+      setTimeout(() => {
+        btnEnviar.textContent = textoOriginal;
+        btnEnviar.style.backgroundColor = "";
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao enviar avaliação: " + error.message);
     }
-
-    const novaAvaliacao = document.createElement("div");
-    novaAvaliacao.className = "item-avaliacao";
-
-    const dataAtual = new Date();
-    const dataFormatada = dataAtual.toLocaleDateString("pt-BR");
-
-    let starsHTML = "";
-    for (let i = 1; i <= 5; i++) {
-      starsHTML += i <= rating ? "★" : "☆";
-    }
-
-    novaAvaliacao.innerHTML = `
-            <div class="cabecalho-avaliacao">
-                <span class="usuario-avaliacao">${nome}</span>
-                <span class="data-avaliacao">${dataFormatada}</span>
-            </div>
-            <div class="estrelas-avaliacao-usuario">${starsHTML}</div>
-            <div class="texto-avaliacao">${comentario}</div>
-        `;
-
-    if (containerAvaliacoes.firstChild) {
-      containerAvaliacoes.insertBefore(
-        novaAvaliacao,
-        containerAvaliacoes.firstChild
-      );
-    } else {
-      containerAvaliacoes.appendChild(novaAvaliacao);
-    }
-
-    formAvaliacao.reset();
-    ratingInput.value = "0";
-    estrelas.forEach((e) => {
-      e.classList.remove("ativa");
-      e.textContent = "☆";
-    });
-
-    const btnEnviar = formAvaliacao.querySelector("button");
-    const textoOriginal = btnEnviar.textContent;
-
-    btnEnviar.textContent = "Obrigado! ✓";
-    btnEnviar.style.backgroundColor = "#107010";
-
-    setTimeout(() => {
-      btnEnviar.textContent = textoOriginal;
-      btnEnviar.style.backgroundColor = "";
-    }, 2000);
   });
 
-  const avaliacoesExemplo = [
-    {
-      nome: "Ana Silva",
-      data: "15/06/2023",
-      rating: 4,
-      comentario:
-        "Adorei o perfume! A fragrância é incrível e dura o dia todo. Recomendo!",
-    },
-    {
-      nome: "Carlos Oliveira",
-      data: "10/06/2023",
-      rating: 5,
-      comentario:
-        "Produto excelente! Superou minhas expectativas. Entrega rápida e bem embalado.",
-    },
-  ];
+  // Carrega avaliações do banco
+  async function carregarAvaliacoes() {
+    try {
+      const response = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}`);
+      if (!response.ok) throw new Error("Erro ao carregar avaliações.");
 
-  avaliacoesExemplo.forEach((avaliacao) => {
-    const avaliacaoElement = document.createElement("div");
-    avaliacaoElement.className = "item-avaliacao";
+      const avaliacoes = await response.json();
+      containerAvaliacoes.innerHTML = "";
 
-    let starsHTML = "";
-    for (let i = 1; i <= 5; i++) {
-      starsHTML += i <= avaliacao.rating ? "★" : "☆";
-    }
+      avaliacoes.forEach((avaliacao) => {
+        const elemento = document.createElement("div");
+        elemento.className = "item-avaliacao";
 
-    avaliacaoElement.innerHTML = `
-            <div class="cabecalho-avaliacao">
-                <span class="usuario-avaliacao">${avaliacao.nome}</span>
-                <span class="data-avaliacao">${avaliacao.data}</span>
-            </div>
-            <div class="estrelas-avaliacao-usuario">${starsHTML}</div>
-            <div class="texto-avaliacao">${avaliacao.comentario}</div>
+        let starsHTML = "";
+        for (let i = 1; i <= 5; i++) {
+          starsHTML += i <= avaliacao.nota ? "★" : "☆";
+        }
+
+        const dataFormatada = new Date(avaliacao.data).toLocaleDateString("pt-BR");
+
+        elemento.innerHTML = `
+          <div class="cabecalho-avaliacao">
+              <span class="usuario-avaliacao">Usuário #${avaliacao.usuario_id}</span>
+              <span class="data-avaliacao">${dataFormatada}</span>
+          </div>
+          <div class="estrelas-avaliacao-usuario">${starsHTML}</div>
+          <div class="texto-avaliacao">${avaliacao.comentario || ""}</div>
         `;
 
-    containerAvaliacoes.appendChild(avaliacaoElement);
-  });
+        containerAvaliacoes.appendChild(elemento);
+      });
+    } catch (error) {
+      console.error(error);
+      containerAvaliacoes.innerHTML = "<p>Erro ao carregar avaliações.</p>";
+    }
+  }
+
+  // Carrega média da avaliação
+  async function carregarMediaAvaliacao() {
+    const estrelasMedia = document.querySelector(".estrelas-avaliacao");
+    const contagemAvaliacoes = document.querySelector(".contagem-avaliacoes");
+
+    try {
+      const responseLista = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}`);
+      const responseMedia = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}/media`);
+
+      if (!responseLista.ok || !responseMedia.ok) throw new Error("Erro ao buscar dados");
+
+      const avaliacoes = await responseLista.json();
+      const { media } = await responseMedia.json();
+
+      const estrelasCheias = Math.round(media);
+      let starsHTML = "";
+      for (let i = 1; i <= 5; i++) {
+        starsHTML += i <= estrelasCheias ? "★" : "☆";
+      }
+
+      if (estrelasMedia) estrelasMedia.innerHTML = starsHTML;
+      if (contagemAvaliacoes) contagemAvaliacoes.textContent = `(${avaliacoes.length} avaliações)`;
+    } catch (err) {
+      console.warn("Erro ao carregar média de avaliação", err);
+    }
+  }
+
+  // Inicializar carregamento
+  carregarAvaliacoes();
+  carregarMediaAvaliacao();
 });

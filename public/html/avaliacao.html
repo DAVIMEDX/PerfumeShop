@@ -1,103 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliações de Produto | Perfume Shop</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/avaliacao.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avaliações de Produto | Perfume Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/avaliacao.css"/>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">Perfume Shop</div>
-        <nav class="navegacao">
-            <ul>
-                <a href="/html/home.html">Início</a></li>
-                <a href="/html/catalogo.html">Shop</a></li>
-                <a href="/html/home.html#servicos">Serviços</a></li>
-                <a href="/html/home.html#sobre">Quem somos</a></li>
-                <a href="/html/home.html#contato">Contato</a></li>
-                <a href="/html/login.html" id="loginBtn">Login</a>
-                <a href="/html/cadastro.html" class="destaque" id="cadastroBtn">Cadastre-se</a>
-                <a href="#" id="logoutBtn" style="display: none;">Sair</a>
-            </ul>
-        </nav>
-    </header>
+  <header class="cabecalho">
+    <div class="logo">Perfume Shop</div>
+    <nav class="navegacao">
+      <ul>
+        <a href="/html/home.html">Início</a></li>
+        <a href="/html/catalogo.html">Shop</a></li>
+        <a href="/html/home.html#servicos">Serviços</a></li>
+        <a href="/html/home.html#sobre">Quem somos</a></li>
+        <a href="/html/home.html#contato">Contato</a></li>
+        <a href="/html/login.html" id="loginBtn">Login</a>
+        <a href="/html/cadastro.html" class="destaque" id="cadastroBtn">Cadastre-se</a>
+        <a href="#" id="logoutBtn" style="display: none;">Sair</a>
+      </ul>
+    </nav>
+  </header>
 
-    <main class="conteudo-principal">
-        <section class="secao-produto">
-            <div class="detalhes-produto">
-                <img src="https://via.placeholder.com/400" alt="Perfume Essence" class="imagem-produto">
-                <div class="info-produto">
-                    <h1 class="titulo-produto">Perfume Essence</h1>
-                    <div class="avaliacao-geral">
-                        <div class="estrelas-avaliacao">
-                            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
-                        </div>
-                        <span class="contagem-avaliacoes">(42 avaliações)</span>
-                    </div>
-                </div>
+  <main class="conteudo-principal">
+    <section class="secao-produto">
+      <div class="detalhes-produto">
+        <img src="https://via.placeholder.com/400" alt="Perfume Essence" class="imagem-produto" />
+        <div class="info-produto">
+          <h1 class="titulo-produto">Perfume Essence</h1>
+          <div class="avaliacao-geral">
+            <div class="estrelas-avaliacao">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
+            <span class="contagem-avaliacoes">(0 avaliações)</span>
+          </div>
+        </div>
+      </div>
 
-            <div class="formulario-avaliacao">
-                <h2 class="titulo-secao">Deixe sua avaliação</h2>
-                <form id="formAvaliacao">
-                    <div class="grupo-formulario">
-                        <label for="nomeUsuario">Seu nome:</label>
-                        <input type="text" id="nomeUsuario" required>
-                    </div>
-                    
-                    <div class="grupo-formulario">
-                        <label>Sua avaliação:</label>
-                        <div class="selecao-estrelas" id="selecaoEstrelas">
-                            <span class="estrela-avaliacao" data-valor="1">☆</span>
-                            <span class="estrela-avaliacao" data-valor="2">☆</span>
-                            <span class="estrela-avaliacao" data-valor="3">☆</span>
-                            <span class="estrela-avaliacao" data-valor="4">☆</span>
-                            <span class="estrela-avaliacao" data-valor="5">☆</span>
-                        </div>
-                        <input type="hidden" id="valorAvaliacao" value="0">
-                    </div>
-                    
-                    <div class="grupo-formulario">
-                        <label for="comentarioUsuario">Seu comentário:</label>
-                        <textarea id="comentarioUsuario" rows="5" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="botao-primario">Enviar Avaliação</button>
-                </form>
+      <div class="formulario-avaliacao">
+        <h2 class="titulo-secao">Deixe sua avaliação</h2>
+        <form id="formAvaliacao">
+          <div class="grupo-formulario">
+            <label>Sua avaliação:</label>
+            <div class="selecao-estrelas" id="selecaoEstrelas">
+              <span class="estrela-avaliacao" data-valor="1">☆</span>
+              <span class="estrela-avaliacao" data-valor="2">☆</span>
+              <span class="estrela-avaliacao" data-valor="3">☆</span>
+              <span class="estrela-avaliacao" data-valor="4">☆</span>
+              <span class="estrela-avaliacao" data-valor="5">☆</span>
             </div>
+            <input type="hidden" id="valorAvaliacao" value="0" />
+          </div>
 
-            <div class="lista-avaliacoes">
-                <h2 class="titulo-secao">Avaliações dos clientes</h2>
-                <div id="containerAvaliacoes">
-                    <div class="item-avaliacao">
-                        <div class="cabecalho-avaliacao">
-                            <span class="usuario-avaliacao">Ana Silva</span>
-                            <span class="data-avaliacao">15/06/2023</span>
-                        </div>
-                        <div class="estrelas-avaliacao-usuario">★★★★☆</div>
-                        <div class="texto-avaliacao">
-                            Adorei o perfume! A fragrância é incrível e dura o dia todo. Recomendo!
-                        </div>
-                    </div>
-                    
-                    <div class="item-avaliacao">
-                        <div class="cabecalho-avaliacao">
-                            <span class="usuario-avaliacao">Carlos Oliveira</span>
-                            <span class="data-avaliacao">10/06/2023</span>
-                        </div>
-                        <div class="estrelas-avaliacao-usuario">★★★★★</div>
-                        <div class="texto-avaliacao">
-                            Produto excelente! Superou minhas expectativas. Entrega rápida e bem embalado.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+          <div class="grupo-formulario">
+            <label for="comentarioUsuario">Seu comentário:</label>
+            <textarea id="comentarioUsuario" rows="5" required></textarea>
+          </div>
 
-    <script src="/js/avaliacao.js"></script>
-    <script src="/js/auth.js"></script>
+          <button type="submit" class="botao-primario">Enviar Avaliação</button>
+        </form>
+      </div>
+
+      <div class="lista-avaliacoes">
+        <h2 class="titulo-secao">Avaliações dos clientes</h2>
+        <div id="containerAvaliacoes"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/avaliacao.js"></script>
+  <script src="/js/auth.js"></script>
 </body>
 </html>

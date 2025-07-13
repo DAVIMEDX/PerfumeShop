@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <img src="${perfume.imagem_url}" alt="${perfume.nome}">
         <h3>${perfume.nome}</h3>
         <p>R$ ${perfume.preco}</p>
-        <button class="btn" onclick="window.location.href='detalhes.html?id=${perfume.id}'">Ver detalhes</button>
+        <button class="btn" onclick="window.location.href = '/html/detalhes.html?id=${perfume.id}'">Ver detalhes</button>
       `;
       container.appendChild(card);
     });
