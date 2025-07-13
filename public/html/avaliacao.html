@@ -17,8 +17,8 @@
                 <a href="/html/home.html#servicos">Serviços</a></li>
                 <a href="/html/home.html#sobre">Quem somos</a></li>
                 <a href="/html/home.html#contato">Contato</a></li>
-                <a href="/html/login.html">Login</a>
-                <a href="/html/cadastro.html" class="destaque">Cadastre-se</a>
+                <a href="/html/cadastro.html" class="destaque" id="cadastroBtn">Cadastre-se</a>
+                <a href="#" id="logoutBtn" style="display: none;">Sair</a>
             </ul>
         </nav>
     </header>
@@ -70,7 +70,6 @@
             <div class="lista-avaliacoes">
                 <h2 class="titulo-secao">Avaliações dos clientes</h2>
                 <div id="containerAvaliacoes">
-                    <!-- Avaliação de exemplo 1 -->
                     <div class="item-avaliacao">
                         <div class="cabecalho-avaliacao">
                             <span class="usuario-avaliacao">Ana Silva</span>
@@ -82,7 +81,6 @@
                         </div>
                     </div>
                     
-                    <!-- Avaliação de exemplo 2 -->
                     <div class="item-avaliacao">
                         <div class="cabecalho-avaliacao">
                             <span class="usuario-avaliacao">Carlos Oliveira</span>
@@ -99,5 +97,6 @@
     </main>
 
     <script src="/js/avaliacao.js"></script>
+    <script src="/js/auth.js"></script>
 </body>
 </html>
