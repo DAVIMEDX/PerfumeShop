@@ -5,14 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const usuarioLogado = localStorage.getItem("usuarioLogado");
 
-  if (usuarioLogado) {
+  if (usuarioLogado === "true") {
     if (loginBtn) loginBtn.style.display = "none";
     if (cadastroBtn) cadastroBtn.style.display = "none";
     if (logoutBtn) logoutBtn.style.display = "inline-block";
 
-    logoutBtn.addEventListener("click", () => {
+    logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
       localStorage.removeItem("usuarioLogado");
-      window.location.reload();
+      location.reload();
     });
   }
 });
