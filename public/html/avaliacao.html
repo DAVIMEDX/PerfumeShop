@@ -1,53 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Perfume Essence | Perfume Shop</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/detalhes.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações de Produto | Perfume Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="avaliacao.css">
+</head>
+<body>
     <header class="cabecalho">
-      <div class="logo">Perfume Shop</div>
-      <nav class="navegacao">
-        <li><a href="/html/home.html">Início</a></li>
-        <li><a href="/html/catalogo.html">Shop</a></li>
-        <li><a href="/html/home.html#servicos">Serviços</a></li>
-        <li><a href="/html/home.html#sobre">Quem somos</a></li>
-        <li><a href="/html/home.html#contato">Contato</a></li>
-        <a href="/html/login.html">Login</a>
-        <a href="/html/cadastro.html" class="destaque">Cadastre-se</a>
-      </nav>
+        <div class="logo">Perfume Shop</div>
+        <nav class="navegacao">
+            <ul>
+                <a href="/html/home.html">Início</a></li>
+                <a href="/html/catalogo.html">Shop</a></li>
+                <a href="/html/home.html#servicos">Serviços</a></li>
+                <a href="/html/home.html#sobre">Quem somos</a></li>
+                <a href="/html/home.html#contato">Contato</a></li>
+                <a href="/html/login.html">Login</a>
+                <a href="/html/cadastro.html" class="destaque">Cadastre-se</a>
+            </ul>
+        </nav>
     </header>
 
     <main class="conteudo-principal">
-      <div class="produto-simples">
-        <div class="imagem-produto">
-          <img src="https://via.placeholder.com/400" alt="Perfume Essence" />
-        </div>
-        <div class="info-simples">
-          <h1 class="titulo-produto">Perfume Essence</h1>
-          <div class="preco-produto">
-            <span class="preco-atual">R$ 249,90</span>
-            <span class="preco-antigo">R$ 299,90</span>
-            <span class="desconto">5% OFF</span>
-          </div>
-          <p class="descricao-curta">
-            Fragrância exclusiva com notas de jasmim, baunilha e âmbar.
-          </p>
+        <section class="secao-produto">
+            <div class="detalhes-produto">
+                <img src="https://via.placeholder.com/400" alt="Perfume Essence" class="imagem-produto">
+                <div class="info-produto">
+                    <h1 class="titulo-produto">Perfume Essence</h1>
+                    <div class="avaliacao-geral">
+                        <div class="estrelas-avaliacao">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+                        </div>
+                        <span class="contagem-avaliacoes">(42 avaliações)</span>
+                    </div>
+                </div>
+            </div>
 
-          <div class="botoes-acao">
-            <button class="botao-carrinho">Adicionar ao Carrinho</button>
-            <a href="avaliacoes.html" class="botao-avaliacao">Ver Avaliações</a>
-          </div>
-        </div>
-      </div>
+            <div class="formulario-avaliacao">
+                <h2 class="titulo-secao">Deixe sua avaliação</h2>
+                <form id="formAvaliacao">
+                    <div class="grupo-formulario">
+                        <label for="nomeUsuario">Seu nome:</label>
+                        <input type="text" id="nomeUsuario" required>
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label>Sua avaliação:</label>
+                        <div class="selecao-estrelas" id="selecaoEstrelas">
+                            <span class="estrela-avaliacao" data-valor="1">☆</span>
+                            <span class="estrela-avaliacao" data-valor="2">☆</span>
+                            <span class="estrela-avaliacao" data-valor="3">☆</span>
+                            <span class="estrela-avaliacao" data-valor="4">☆</span>
+                            <span class="estrela-avaliacao" data-valor="5">☆</span>
+                        </div>
+                        <input type="hidden" id="valorAvaliacao" value="0">
+                    </div>
+                    
+                    <div class="grupo-formulario">
+                        <label for="comentarioUsuario">Seu comentário:</label>
+                        <textarea id="comentarioUsuario" rows="5" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="botao-primario">Enviar Avaliação</button>
+                </form>
+            </div>
+
+            <div class="lista-avaliacoes">
+                <h2 class="titulo-secao">Avaliações dos clientes</h2>
+                <div id="containerAvaliacoes">
+                    <!-- Avaliação de exemplo 1 -->
+                    <div class="item-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <span class="usuario-avaliacao">Ana Silva</span>
+                            <span class="data-avaliacao">15/06/2023</span>
+                        </div>
+                        <div class="estrelas-avaliacao-usuario">★★★★☆</div>
+                        <div class="texto-avaliacao">
+                            Adorei o perfume! A fragrância é incrível e dura o dia todo. Recomendo!
+                        </div>
+                    </div>
+                    
+                    <!-- Avaliação de exemplo 2 -->
+                    <div class="item-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <span class="usuario-avaliacao">Carlos Oliveira</span>
+                            <span class="data-avaliacao">10/06/2023</span>
+                        </div>
+                        <div class="estrelas-avaliacao-usuario">★★★★★</div>
+                        <div class="texto-avaliacao">
+                            Produto excelente! Superou minhas expectativas. Entrega rápida e bem embalado.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script src="detalhes.js"></script>
-  </body>
+    <script src="avaliacao.js"></script>
+</body>
 </html>
