@@ -33,25 +33,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (precoAtual) precoAtual.textContent = `R$ ${perfume.preco.toFixed(2)}`;
     if (descricaoCurta) descricaoCurta.textContent = perfume.descricao;
-    if (botaoAvaliacoes) botaoAvaliacoes.href = `avaliacoes.html?id=${perfume.id}`;
+    if (botaoAvaliacoes) botaoAvaliacoes.href = `avaliacao.html?id=${perfume.id}`;
 
     // Atualiza contador do carrinho (se houver itens)
-    const carrinhoResponse = await fetch('http://localhost:8000/carrinho', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    
-    if (carrinhoResponse.ok && contadorCarrinho) {
-      const carrinho = await carrinhoResponse.json();
-      contadorCarrinho.textContent = carrinho.itens.reduce((total, item) => total + item.quantidade, 0);
-    }
+    await atualizarContadorCarrinho();
 
-    // Evento para adicionar ao carrinho
+    // Evento para adicionar ao carrinho com prevenção de navegação imediata
     const botaoCarrinho = document.querySelector('.botao-carrinho');
     if (botaoCarrinho) {
-      botaoCarrinho.addEventListener('click', () => {
-        adicionarAoCarrinho(perfume.id);
+      botaoCarrinho.addEventListener('click', async (event) => {
+        event.preventDefault(); // previne o redirecionamento imediato
+        await adicionarAoCarrinho(perfume.id);
+        window.location.href = '/html/carrinho.html'; // redireciona só depois de adicionar
       });
     }
 
@@ -70,6 +63,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 });
+
+async function atualizarContadorCarrinho() {
+  const contador = document.querySelector('.contador-carrinho');
+  const token = localStorage.getItem('token');
+  if (!token || !contador) return;
+
+  try {
+    const carrinhoResponse = await fetch('http://localhost:8000/carrinho/itens', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!carrinhoResponse.ok) throw new Error('Erro ao buscar itens do carrinho');
+
+    const carrinho = await carrinhoResponse.json();
+    const totalItens = carrinho.reduce((total, item) => total + item.quantidade, 0);
+    contador.textContent = totalItens;
+  } catch (error) {
+    console.error('Erro ao atualizar contador do carrinho:', error);
+  }
+}
 
 async function adicionarAoCarrinho(perfumeId) {
   const token = localStorage.getItem('token'); 
@@ -95,19 +109,15 @@ async function adicionarAoCarrinho(perfumeId) {
 
     if (!response.ok) throw new Error('Erro ao adicionar ao carrinho');
 
-    const data = await response.json();
+    // Atualiza o contador do carrinho para o valor real no backend
+    await atualizarContadorCarrinho();
+
     const botaoCarrinho = document.querySelector('.botao-carrinho');
-    const contador = document.querySelector('.contador-carrinho');
 
     // Feedback visual
     if (botaoCarrinho) {
       botaoCarrinho.textContent = '✔️ Adicionado!';
       botaoCarrinho.style.backgroundColor = '#4CAF50';
-    }
-
-    // Atualiza contador
-    if (contador) {
-      contador.textContent = (parseInt(contador.textContent || '0') + 1).toString();
     }
 
     setTimeout(() => {

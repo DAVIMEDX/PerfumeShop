@@ -21,6 +21,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       const data = await response.json();
       alert('Login realizado com sucesso!');
       localStorage.setItem('token', data.access_token);
+      localStorage.setItem('email', email);  
       window.location.href = 'home.html';
     } else {
       const error = await response.json();
@@ -30,4 +31,3 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     alert('Erro na requisição: ' + err.message);
   }
 });
-
