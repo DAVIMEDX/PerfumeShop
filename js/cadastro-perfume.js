@@ -1,38 +1,58 @@
-document.getElementById('formCadastroPerfume').addEventListener('submit', function(event) {
-  event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('formCadastroPerfume');
+  const mensagemEl = document.getElementById('mensagem');
 
-  const nome = document.getElementById('nome').value.trim();
-  const descricao = document.getElementById('descricao').value.trim();
-  const preco = parseFloat(document.getElementById('preco').value);
-  const imagem = document.getElementById('imagem').value.trim();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  if (!nome || !descricao || isNaN(preco) || preco <= 0 || !imagem) {
-    alert('Por favor, preencha todos os campos corretamente.');
-    return;
-  }
+    const token = localStorage.getItem('token'); 
 
-  // Pega os perfumes atuais do localStorage ou cria um array vazio
-  const perfumes = JSON.parse(localStorage.getItem('perfumes')) || [];
+    if (!token) {
+      alert('Acesso não autorizado. Faça login como administrador.');
+      window.location.href = 'login-admin.html';
+      return;
+    }
 
-  // Cria um novo perfume
-  const novoPerfume = {
-    id: Date.now(),  // id único pelo timestamp
-    nome,
-    descricao,
-    preco,
-    imagem
-  };
+    const nome = document.getElementById('nome').value;
+    const marca = 'Marca Padrão'; 
+    const preco = parseFloat(document.getElementById('preco').value);
+    const estoque = 10; 
+    const volume = '100ml';
+    const descricao = document.getElementById('descricao').value;
+    const imagem_url = document.getElementById('imagem').value;
 
-  perfumes.push(novoPerfume);
+    const dados = {
+      nome,
+      marca,
+      preco,
+      estoque,
+      volume,
+      descricao,
+      imagem_url
+    };
 
-  // Salva no localStorage
-  localStorage.setItem('perfumes', JSON.stringify(perfumes));
+    try {
+      const response = await fetch('http://localhost:8000/perfumes/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(dados)
+      });
 
-  // Mensagem de sucesso
-  const msg = document.getElementById('mensagem');
-  msg.textContent = `Perfume "${nome}" cadastrado com sucesso!`;
+      if (!response.ok) {
+        const erro = await response.json();
+        throw new Error(erro.detail || 'Erro ao cadastrar perfume');
+      }
 
-  // Reseta o formulário
-  this.reset();
+      mensagemEl.textContent = 'Perfume cadastrado com sucesso!';
+      mensagemEl.style.color = 'green';
+      form.reset();
+    } catch (error) {
+      console.error('Erro ao cadastrar perfume:', error);
+      mensagemEl.textContent = `Erro: ${error.message}`;
+      mensagemEl.style.color = 'red';
+    }
+  });
 });
-
