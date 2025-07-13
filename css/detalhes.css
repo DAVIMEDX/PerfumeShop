@@ -28,7 +28,7 @@ body {
 
 /* Cabeçalho */
 .cabecalho {
-  background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
+  background: linear-gradient(to right, #000000 30%, #d4c099 70%);
   padding: 1rem 4rem;
   display: flex;
   justify-content: space-between;
