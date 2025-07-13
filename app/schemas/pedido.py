@@ -1,5 +1,5 @@
-from pydantic import BaseModel
-from typing import List
+from pydantic import BaseModel, EmailStr
+from typing import List, Optional
 from datetime import datetime
 
 class ItemPedidoBase(BaseModel):
@@ -25,10 +25,14 @@ class PedidoBase(BaseModel):
 
 class PedidoCreate(PedidoBase):
     itens: List[ItemPedidoCreate]
+    email: EmailStr  # ✅ necessário para geração do Pix (requerido pelo Mercado Pago)
 
 class Pedido(PedidoBase):
     id: int
     criado_em: datetime
+    status: str  # ✅ novo campo
+    pix_id: Optional[str] = None  # ✅ novo campo
+    qr_code_base64: Optional[str] = None  # ✅ novo campo
     itens: List[ItemPedido]
 
     class Config:

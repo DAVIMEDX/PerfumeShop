@@ -1,6 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-#from app.database import SessionLocal
+
+# String de conexão PostgreSQL
+SQLALCHEMY_DATABASE_URL = "postgresql://postgres:medx4@localhost:5432/Projeto_ES"
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
@@ -8,11 +16,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-# String de conexão PostgreSQL
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:medx4@localhost:5432/Projeto_ES"
-
-
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()

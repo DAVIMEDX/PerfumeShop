@@ -7,6 +7,10 @@ from app.schemas import perfume as schemas_perfume
 from app import database
 from app.crud import perfume as crud_perfume
 from app.models import user as models_user
+from fastapi import File, Form, UploadFile
+import shutil
+import os
+from uuid import uuid4
 
 router = APIRouter()
 
@@ -34,3 +38,11 @@ def atualizar_perfume(perfume_id: int, dados: schemas_perfume.PerfumeCreate, db:
 @router.delete("/perfumes/{perfume_id}", status_code=204)
 def deletar_perfume(perfume_id: int, db: Session = Depends(database.get_db), admin: models_user.Usuario = Depends(auth.verificar_admin)):
     crud_perfume.deletar_perfume(db, perfume_id)
+
+
+@router.get("/admin/pedidos", response_model=List[schemas.Pedido])
+def listar_pedidos_admin(
+    db: Session = Depends(database.get_db),
+    admin: Usuario = Depends(auth.verificar_admin),
+):
+    return crud.listar_todos_pedidos(db)

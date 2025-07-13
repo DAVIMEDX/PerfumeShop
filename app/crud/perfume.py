@@ -32,6 +32,8 @@ def atualizar_perfume(db: Session, perfume_id: int, dados: schemas_perfume.Perfu
     perfume.estoque = dados.estoque
     perfume.volume = dados.volume
     perfume.descricao = dados.descricao
+    perfume.imagem_url = dados.imagem_url  
+
 
     db.commit()
     db.refresh(perfume)
@@ -43,3 +45,6 @@ def deletar_perfume(db: Session, perfume_id: int):
         raise HTTPException(status_code=404, detail="Perfume não encontrado")
     db.delete(perfume)
     db.commit()
+
+def listar_todos_pedidos(db: Session):
+    return db.query(models.Pedido).all()
