@@ -7,7 +7,7 @@
   --cor-secundaria-texto: #8d4b4b;
   --cor-borda: #9d7474;
   --cor-sombra: rgba(0, 0, 0, 0.1);
-  --fonte-titulo: "Playfair Display", Arial;
+  --fonte-titulo: "Playfair Display", serif;
   --fonte-corpo: "Open Sans", sans-serif;
 }
 
@@ -21,14 +21,13 @@ body {
   font-family: var(--fonte-corpo);
   color: var(--cor-principal);
   background-color: var(--cor-fundo);
-  margin: 0;
   min-height: 100vh;
   line-height: 1.6;
 }
 
 .cabecalho {
   background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
-  padding: 1rem 4rem;
+  padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +39,7 @@ body {
 
 .logo {
   font-family: var(--fonte-titulo);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--cor-principal);
 }
@@ -49,14 +48,12 @@ body {
   display: flex;
   gap: 2rem;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .navegacao a {
   text-decoration: none;
   color: var(--cor-principal);
-  font-weight: 500;
+  font-weight: bold;
   transition: color 0.3s;
 }
 
@@ -79,9 +76,10 @@ body {
 .acoes-usuario .destaque {
   background-color: var(--cor-botao);
   color: var(--cor-secundaria);
-  padding: 0.5rem 1.2rem;
-  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 40px;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .acoes-usuario .destaque:hover {
@@ -89,7 +87,7 @@ body {
 }
 
 .conteudo-principal {
-  padding: 2rem 4rem;
+  padding: 4rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -98,24 +96,23 @@ body {
   background-color: var(--cor-secundaria);
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 4px 15px var(--cor-sombra);
+  box-shadow: 0 8px 20px var(--cor-sombra);
   margin-bottom: 2rem;
 }
 
 .detalhes-produto {
   display: flex;
   gap: 3rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .imagem-produto {
   width: 100%;
   max-width: 400px;
-  height: auto;
-  border-radius: 8px;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px var(--cor-sombra);
 }
 
 .info-produto {
@@ -125,7 +122,7 @@ body {
 
 .titulo-produto {
   font-family: var(--fonte-titulo);
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   color: var(--cor-principal);
 }
@@ -162,7 +159,7 @@ body {
 
 .titulo-secao {
   font-family: var(--fonte-titulo);
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
   color: var(--cor-principal);
 }
@@ -174,7 +171,7 @@ body {
 .grupo-formulario label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--cor-principal);
 }
 
@@ -185,7 +182,7 @@ body {
   border: 1px solid var(--cor-borda);
   border-radius: 20px;
   font-family: var(--fonte-corpo);
-  font-size: 0.95rem;
+  font-size: 1rem;
   background-color: var(--cor-secundaria);
   color: var(--cor-principal);
   transition: box-shadow 0.2s, border-color 0.2s;
@@ -226,16 +223,21 @@ body {
   background-color: var(--cor-botao);
   color: var(--cor-secundaria);
   border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 20px;
-  cursor: pointer;
+  padding: 0.75rem 2rem;
+  border-radius: 40px;
   font-family: var(--fonte-corpo);
-  font-size: 0.9rem;
-  transition: background-color 0.3s;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  transform: scale(1);
+  text-align: center;
+  box-shadow: 0 4px 10px var(--cor-sombra);
 }
 
 .botao-primario:hover {
   background-color: #1a2f4d;
+  transform: scale(1.05);
 }
 
 .lista-avaliacoes {
@@ -274,30 +276,32 @@ body {
 }
 
 .texto-avaliacao {
-  line-height: 1.6;
   color: var(--cor-principal);
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {
   .cabecalho {
     flex-direction: column;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
   .navegacao ul {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
   }
 
   .acoes-usuario {
     width: 100%;
     justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .conteudo-principal {
-    padding: 1rem;
+    padding: 2rem 1rem;
   }
 
   .detalhes-produto {
