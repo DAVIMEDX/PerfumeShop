@@ -33,6 +33,13 @@ header {
   z-index: 1000;
 }
 
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: bold;
+}
+
 header h2 a {
   text-decoration: none;    
   color: var(--cor-principal); 
@@ -41,14 +48,6 @@ header h2 a {
 
 header h2 a:hover {
   color: #000000aa;
-}
-
-nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: var(--cor-principal);
-  font-weight: bold;
-  transition: 0.3s;
 }
 
 nav a:hover {
