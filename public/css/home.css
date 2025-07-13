@@ -40,7 +40,7 @@ nav a {
 /* FOCO PADRÃO DO NAVEGADOR (sem alterações) */
 
 .hero {
-  background: url('../img/banner2.jpg') no-repeat center center;
+  background: url('/img/banner1.jpg') no-repeat center center;
   background-size: cover;
   text-align: center;
   padding: 8rem 2rem;
@@ -69,6 +69,8 @@ nav a {
   margin-top: 1rem;
   transition: all 0.3s ease;  
   transform: scale(1);
+  text-decoration: none;
+
 }
 
 .btn:hover {
