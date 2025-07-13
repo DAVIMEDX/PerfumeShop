@@ -65,10 +65,16 @@ nav a:hover {
   max-width: 700px;
   margin: 3rem auto;
   background-color: var(--cor-secundaria);
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px var(--cor-sombra);
+  padding: 3rem 4rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.painel:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  transform: translateY(-4px);
 }
 
 .painel h1 {
