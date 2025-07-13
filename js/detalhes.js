@@ -57,7 +57,7 @@ window.onload = async () => {
     precoAntigoElem.textContent = `R$ ${precoAntigo.toFixed(2).replace('.', ',')}`;
     descontoElem.textContent = `${desconto}% OFF`;
     descricaoCurta.textContent = perfume.descricao;
-    botaoAvaliacoes.href = `/html/avaliacoes.html?id=${perfume.id}`;
+    botaoAvaliacoes.href = `/html/avaliacao.html?id=${perfume.id}`;
 
     // Atualiza contador do carrinho, se o usuário estiver autenticado
     if (contadorCarrinho) {

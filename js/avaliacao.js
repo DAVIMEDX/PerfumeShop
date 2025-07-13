@@ -1,10 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Você precisa estar logado para acessar essa página.");
+    window.location.href = "/html/login.html"; 
+    return; 
+  }
+
   const estrelas = document.querySelectorAll("#selecaoEstrelas .estrela-avaliacao");
   const ratingInput = document.getElementById("valorAvaliacao");
   const formAvaliacao = document.getElementById("formAvaliacao");
   const containerAvaliacoes = document.getElementById("containerAvaliacoes");
   const perfumeId = new URLSearchParams(window.location.search).get("id");
-  const token = localStorage.getItem("token");
 
   // Seleção visual de estrelas
   estrelas.forEach((estrela) => {
@@ -155,7 +162,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Carrega detalhes do perfume (imagem e nome) dinamicamente
+  async function carregarDetalhesPerfume() {
+    if (!perfumeId) return;
+
+    try {
+      const response = await fetch(`http://localhost:8000/perfumes/${perfumeId}`);
+      if (!response.ok) throw new Error("Erro ao carregar detalhes do perfume.");
+
+      const perfume = await response.json();
+
+      const img = document.querySelector(".imagem-produto");
+      if (img) {
+        img.src = perfume.imagem_url || "https://via.placeholder.com/400";
+        img.alt = perfume.nome || "Imagem do perfume";
+      }
+
+      const nome = document.querySelector(".titulo-produto");
+      if (nome) nome.textContent = perfume.nome || "Perfume";
+
+    } catch (error) {
+      console.error("Erro ao carregar detalhes do perfume:", error);
+    }
+  }
+
   // Inicializar carregamento
+  carregarDetalhesPerfume();
   carregarAvaliacoes();
   carregarMediaAvaliacao();
 });
