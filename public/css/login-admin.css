@@ -35,12 +35,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
-  background: linear-gradient(to right, #fefefe 30%, var(--cor-fundo) 70%);
+  padding: 2rem 4rem;
+  background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: bold;
 }
 
 header h2 {
@@ -53,14 +59,6 @@ header h2 {
 nav {
   display: flex;
   gap: 1.5rem;
-}
-
-nav a {
-  color: var(--cor-principal);
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: bold;
-  transition: color 0.3s;
 }
 
 nav a:hover {
