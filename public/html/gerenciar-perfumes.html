@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Gerenciar Perfumes - Admin</title>
-  <link rel="stylesheet" href="/css/catalogo.css" />
   <link rel="stylesheet" href="/css/gerenciar-perfumes.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <body>
   <header>
@@ -45,7 +45,7 @@
           <h2>${perfume.nome}</h2>
           <p><strong>Descrição:</strong> ${perfume.descricao}</p>
           <p><strong>Preço:</strong> R$ ${perfume.preco.toFixed(2)}</p>
-          <p><strong>Imagem:</strong> <a href="${perfume.imagem}" target="_blank">Ver imagem</a></p>
+          <p><strong>Imagem:</strong> <a href="${perfume.imagem}" target="_blank" rel="noopener noreferrer">Ver imagem</a></p>
           <div class="btn-group">
             <button class="btn btn-editar" onclick="editarPerfume(${index})">Editar</button>
             <button class="btn btn-remover" onclick="removerPerfume(${index})">Remover</button>
@@ -73,3 +73,4 @@
   </script>
 </body>
 </html>
+
