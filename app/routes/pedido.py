@@ -10,14 +10,14 @@ from app.services import pagamento  # ✅ novo import
 
 router = APIRouter()
 
-# ✅ Criar novo pedido com Pix
 @router.post("/pedidos", response_model=schemas.Pedido)
 def criar_pedido(
     pedido: schemas.PedidoCreate,
     db: Session = Depends(database.get_db),
     usuario: Usuario = Depends(get_current_user),
 ):
-    return crud.criar_pedido(db, usuario.id, pedido)
+    return crud.criar_pedido(db, usuario.id, pedido, usuario)
+
 
 # ✅ Listar pedidos do usuário autenticado
 @router.get("/pedidos", response_model=List[schemas.Pedido])

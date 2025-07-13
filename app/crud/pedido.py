@@ -1,44 +1,45 @@
 from sqlalchemy.orm import Session
-from app.models import pedido as models
-from app.schemas import pedido as schemas
-from app.services import pagamento  # 🔹 novo módulo para integração com Mercado Pago
+from app import models, schemas
+from services.pagamento import gerar_pix
 
-def criar_pedido(db: Session, usuario_id: int, pedido_data: schemas.PedidoCreate):
-    # 🔸 Gera cobrança Pix via Mercado Pago
-    pix_info = pagamento.gerar_pix(
-        valor=pedido_data.total,
-        descricao="Compra na loja de perfumes",
-        email=pedido_data.email  # 🔸 você precisa garantir que esse campo está no schema
-    )
-
+def criar_pedido(db: Session, usuario_id: int, pedido: schemas.PedidoCreate, usuario):
     novo_pedido = models.Pedido(
         usuario_id=usuario_id,
-        endereco=pedido_data.endereco,
-        cidade=pedido_data.cidade,
-        cep=pedido_data.cep,
-        metodo_pagamento=pedido_data.metodo_pagamento,
-        total=pedido_data.total,
-        status="pendente",  # 🔸 novo campo
-        pix_id=pix_info.get("id"),
-        qr_code_base64=pix_info.get("point_of_interaction", {})
-                               .get("transaction_data", {})
-                               .get("qr_code_base64")
+        endereco=pedido.endereco,
+        cidade=pedido.cidade,
+        cep=pedido.cep,
+        metodo_pagamento=pedido.metodo_pagamento,
+        total=pedido.total,
+        status="pendente"
     )
-
-    for item in pedido_data.itens:
-        novo_pedido.itens.append(
-            models.ItemPedido(
-                perfume_id=item.perfume_id,
-                quantidade=item.quantidade,
-                preco_unitario=item.preco_unitario
-            )
-        )
-
     db.add(novo_pedido)
+    db.flush()  # Para garantir que o novo_pedido.id exista
+
+    # Salvar itens
+    for item in pedido.itens:
+        item_db = models.ItemPedido(
+            pedido_id=novo_pedido.id,
+            perfume_id=item.perfume_id,
+            quantidade=item.quantidade,
+            preco_unitario=item.preco_unitario
+        )
+        db.add(item_db)
+
+    # Usar o email real do usuário logado
+    email_usuario = usuario.email
+
+    resposta_pix = gerar_pix(valor=pedido.total, descricao="Compra Perfume Shop", email=email_usuario)
+
+    novo_pedido.pix_id = resposta_pix.get("id")
+    novo_pedido.qr_code_base64 = resposta_pix.get("point_of_interaction", {}).get("transaction_data", {}).get("qr_code_base64")
+
     db.commit()
     db.refresh(novo_pedido)
     return novo_pedido
 
-
-def listar_pedidos(db: Session, usuario_id: int):
-    return db.query(models.Pedido).filter_by(usuario_id=usuario_id).all()
+def atualizar_status_pagamento(db: Session, pix_id: str, novo_status: str):
+    pedido = db.query(models.Pedido).filter(models.Pedido.pix_id == pix_id).first()
+    if pedido:
+        pedido.status = novo_status
+        db.commit()
+    return pedido

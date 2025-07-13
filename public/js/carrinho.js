@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const subtotalEl = document.getElementById('subtotal');
   const descontoEl = document.getElementById('desconto');
   const totalEl = document.getElementById('total');
-
   const token = localStorage.getItem('token');
+
   if (!token) {
     alert('Usuário não autenticado. Faça login.');
-    window.location.href = 'login.html';
+    window.location.href = '/html/login.html';
     return;
   }
 
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       if (!response.ok) throw new Error('Erro ao buscar itens do carrinho');
       const itens = await response.json();
-     
 
       let subtotal = 0;
       const listaContainer = document.getElementById('produtos-carrinho');
@@ -53,12 +52,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
       descontoEl.textContent = `R$ ${desconto.toFixed(2)}`;
       totalEl.textContent = `R$ ${total.toFixed(2)}`;
-      
+
       const economiaEl = document.getElementById('valor-economia');
       const totalFinalEl = document.getElementById('total-final');
-
-      economiaEl.textContent = `R$ ${desconto.toFixed(2)}`;
-      totalFinalEl.textContent = `R$ ${total.toFixed(2)}`;
+      if (economiaEl && totalFinalEl) {
+        economiaEl.textContent = `R$ ${desconto.toFixed(2)}`;
+        totalFinalEl.textContent = `R$ ${total.toFixed(2)}`;
+      }
 
       adicionarEventos();
     } catch (error) {
@@ -92,14 +92,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         try {
           const res = await fetch(`http://localhost:8000/carrinho/${itemId}`, {
-          method: 'PATCH',
-          headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`
-              },
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`
+            },
             body: JSON.stringify({ quantidade: novaQuantidade })
-        });
-
+          });
 
           if (!res.ok) throw new Error('Erro ao atualizar quantidade');
           await carregarCarrinho();
@@ -110,54 +109,164 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  function mostrarQRCode(base64) {
+    const modal = document.createElement('div');
+    modal.style.position = 'fixed';
+    modal.style.top = 0;
+    modal.style.left = 0;
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    modal.style.display = 'flex';
+    modal.style.flexDirection = 'column';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = 9999;
+
+    modal.innerHTML = `
+      <div style="background:#fff; padding:20px; border-radius:8px; text-align:center; max-width:320px;">
+        <h2>Pague com PIX</h2>
+        <img src="data:image/png;base64,${base64}" alt="QR Code PIX" style="width:250px; height:250px; margin-bottom:10px;" />
+        <p>Use seu app bancário para escanear o QR code e realizar o pagamento.</p>
+        <p id="status-pagamento">Aguardando pagamento...</p>
+        <button id="btnFecharQR" style="margin-top:15px; padding:8px 20px; font-size:16px; cursor:pointer;">Cancelar</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('btnFecharQR').onclick = () => {
+      modal.remove();
+    };
+
+    return modal;
+  }
+
+  async function verificarPagamento(pixId, dadosPedido, modal) {
+    let tentativas = 0;
+    const maxTentativas = 30;
+
+    const statusPagamento = modal.querySelector('#status-pagamento');
+
+    const intervalo = setInterval(async () => {
+      tentativas++;
+
+      try {
+        const resp = await fetch(`http://localhost:8000/pagamento/${pixId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const data = await resp.json();
+
+        if (data.status === 'approved' || data.status === 'aprovado') {
+          clearInterval(intervalo);
+          statusPagamento.textContent = "Pagamento confirmado! Finalizando pedido...";
+          await criarPedido(dadosPedido);
+          modal.remove();
+        }
+
+        if (tentativas >= maxTentativas) {
+          clearInterval(intervalo);
+          statusPagamento.textContent = "Pagamento não detectado. Tente novamente.";
+        }
+      } catch (err) {
+        console.error("Erro ao verificar pagamento:", err);
+      }
+    }, 5000);
+  }
+
+  async function criarPedido(dadosPedido) {
+    const resposta = await fetch('http://localhost:8000/pedidos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(dadosPedido)
+    });
+
+    if (!resposta.ok) {
+      const erroMsg = await resposta.text();
+      throw new Error(`Erro ao finalizar pedido: ${erroMsg}`);
+    }
+
+    alert("Pedido finalizado com sucesso!");
+    window.location.href = 'home.html';
+  }
+
+  async function finalizarPedido() {
+    const endereco = document.getElementById('endereco').value;
+    const cidade = document.getElementById('cidade').value;
+    const cep = document.getElementById('cep').value;
+
+    const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!respCarrinho.ok) {
+      alert("Erro ao buscar itens do carrinho.");
+      return;
+    }
+
+    const itens = await respCarrinho.json();
+
+    if (itens.length === 0) {
+      alert("Seu carrinho está vazio.");
+      return;
+    }
+
+    const total = itens.reduce((soma, item) =>
+      soma + item.perfume.preco * item.quantidade * 0.95, 0);
+
+    const email = localStorage.getItem('email');
+    if (!email) {
+      alert("Email do usuário não encontrado. Faça login novamente.");
+      window.location.href = '/html/login.html';
+      return;
+    }
+
+    const dadosPedido = {
+      endereco,
+      cidade,
+      cep,
+      metodo_pagamento: 'pix',
+      total,
+      itens: itens.map(item => ({
+        perfume_id: item.perfume.id,
+        quantidade: item.quantidade,
+        preco_unitario: item.perfume.preco
+      })),
+      email
+    };
+
+    const resposta = await fetch('http://localhost:8000/pagamento/pix', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        valor: total,
+        descricao: "Compra Perfume Shop",
+        email
+      })
+    });
+
+    if (!resposta.ok) {
+      alert("Erro ao gerar pagamento PIX.");
+      return;
+    }
+
+    const pagamento = await resposta.json();
+    const modal = mostrarQRCode(pagamento.point_of_interaction.transaction_data.qr_code_base64);
+    verificarPagamento(pagamento.id, dadosPedido, modal);
+  }
+
   await carregarCarrinho();
 
   const form = document.getElementById('formFinalizarPedido');
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
-    const endereco = document.getElementById('endereco').value;
-    const cidade = document.getElementById('cidade').value;
-    const cep = document.getElementById('cep').value;
-
-    try {
-      const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      if (!respCarrinho.ok) throw new Error('Erro ao buscar itens do carrinho');
-      const itens = await respCarrinho.json();
-
-      const dados = {
-        endereco,
-        cidade,
-        cep,
-        metodo_pagamento: 'pix',
-        total: itens.reduce((soma, item) =>
-          soma + item.perfume.preco * item.quantidade * 0.95, 0),
-        itens: itens.map(item => ({
-          perfume_id: item.perfume.id,
-          quantidade: item.quantidade,
-          preco_unitario: item.perfume.preco
-        }))
-      };
-
-      const resposta = await fetch('http://localhost:8000/pedidos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(dados)
-      });
-
-      if (!resposta.ok) throw new Error('Erro ao finalizar pedido');
-
-      alert('Pedido realizado com sucesso!');
-      window.location.href = 'home.html';
-    } catch (erro) {
-      console.error(erro);
-      alert('Erro ao finalizar pedido');
-    }
+    await finalizarPedido();
   });
 });

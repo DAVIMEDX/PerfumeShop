@@ -4,6 +4,11 @@ from app import database
 from app.routes import cart as routes_cart, user as routes_user, perfume as routes_perfume, pedido as routes_pedido, avaliacao as routes_avaliacao
 from app.models import perfume as models_perfume, user as models_user, avaliacao as models_avaliacao
 from fastapi.middleware.cors import CORSMiddleware
+from routes import pagamento
+
+from routes.pagamento import router as pagamento_router
+
+
 
 # Cria as tabelas no banco
 models_perfume.Base.metadata.create_all(bind=database.engine)
@@ -35,3 +40,4 @@ app.include_router(routes_user.router, tags=["Usuário"])
 app.include_router(routes_cart.router, tags=["Carrinho"])
 app.include_router(routes_pedido.router,tags=["Pedido"])
 app.include_router(routes_avaliacao.router, tags=["Avaliações"])
+app.include_router(pagamento_router, tags=["Pagamento"])
