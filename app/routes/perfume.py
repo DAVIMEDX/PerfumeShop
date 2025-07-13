@@ -11,6 +11,9 @@ from fastapi import File, Form, UploadFile
 import shutil
 import os
 from uuid import uuid4
+from typing import List
+from app.schemas import pedido as schemas
+from app.models.user import Usuario
 
 router = APIRouter()
 
