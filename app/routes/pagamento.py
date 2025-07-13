@@ -2,9 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.orm import Session
-from services.pagamento import gerar_pix, verificar_status
+from app.services.pagamento import gerar_pix, verificar_status
 from app import database
 from app.crud import pedido as crud
+
 
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -16,6 +17,8 @@ class PixRequest(BaseModel):
 
 @router.post("/pagamento/pix")
 async def criar_pagamento_pix(pix_request: PixRequest, token: str = Depends(oauth2_scheme)):
+    print(f"Valor recebido para pagamento PIX: {pix_request.valor}")
+
     if not token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token inválido")
 
@@ -26,6 +29,7 @@ async def criar_pagamento_pix(pix_request: PixRequest, token: str = Depends(oaut
     )
 
     if "id" not in resposta:
+        print("Erro ao gerar Pix:", resposta)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Erro ao gerar pagamento PIX")
 
     return resposta

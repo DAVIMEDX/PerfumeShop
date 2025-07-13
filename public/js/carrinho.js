@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   async function criarPedido(dadosPedido) {
+    console.log("Dados do pedido a enviar:", dadosPedido);
     const resposta = await fetch('http://localhost:8000/pedidos', {
       method: 'POST',
       headers: {
@@ -194,73 +195,78 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = 'home.html';
   }
 
-  async function finalizarPedido() {
-    const endereco = document.getElementById('endereco').value;
-    const cidade = document.getElementById('cidade').value;
-    const cep = document.getElementById('cep').value;
+ async function finalizarPedido() {
+  const endereco = document.getElementById('endereco').value;
+  const cidade = document.getElementById('cidade').value;
+  const cep = document.getElementById('cep').value;
 
-    const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+  const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
 
-    if (!respCarrinho.ok) {
-      alert("Erro ao buscar itens do carrinho.");
-      return;
-    }
-
-    const itens = await respCarrinho.json();
-
-    if (itens.length === 0) {
-      alert("Seu carrinho está vazio.");
-      return;
-    }
-
-    const total = itens.reduce((soma, item) =>
-      soma + item.perfume.preco * item.quantidade * 0.95, 0);
-
-    const email = localStorage.getItem('email');
-    if (!email) {
-      alert("Email do usuário não encontrado. Faça login novamente.");
-      window.location.href = '/html/login.html';
-      return;
-    }
-
-    const dadosPedido = {
-      endereco,
-      cidade,
-      cep,
-      metodo_pagamento: 'pix',
-      total,
-      itens: itens.map(item => ({
-        perfume_id: item.perfume.id,
-        quantidade: item.quantidade,
-        preco_unitario: item.perfume.preco
-      })),
-      email
-    };
-
-    const resposta = await fetch('http://localhost:8000/pagamento/pix', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        valor: total,
-        descricao: "Compra Perfume Shop",
-        email
-      })
-    });
-
-    if (!resposta.ok) {
-      alert("Erro ao gerar pagamento PIX.");
-      return;
-    }
-
-    const pagamento = await resposta.json();
-    const modal = mostrarQRCode(pagamento.point_of_interaction.transaction_data.qr_code_base64);
-    verificarPagamento(pagamento.id, dadosPedido, modal);
+  if (!respCarrinho.ok) {
+    alert("Erro ao buscar itens do carrinho.");
+    return;
   }
+
+  const itens = await respCarrinho.json();
+
+  if (itens.length === 0) {
+    alert("Seu carrinho está vazio.");
+    return;
+  }
+
+  const total = itens.reduce((soma, item) =>
+    soma + item.perfume.preco * item.quantidade * 0.95, 0);
+
+  const email = localStorage.getItem('email');
+  if (!email) {
+    alert("Email do usuário não encontrado. Faça login novamente.");
+    window.location.href = '/html/login.html';
+    return;
+  }
+
+  const dadosPedido = {
+    endereco,
+    cidade,
+    cep,
+    metodo_pagamento: 'pix',
+    total,
+    itens: itens.map(item => ({
+      perfume_id: item.perfume.id,
+      quantidade: item.quantidade,
+      preco_unitario: item.perfume.preco
+    })),
+    email
+  };
+
+  // Ajuste no payload para o backend Mercado Pago:
+ const payloadPagamento = {
+  valor: total,
+  descricao: "Compra Perfume Shop",
+  email: email
+};
+
+
+  const resposta = await fetch('http://localhost:8000/pagamento/pix', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(payloadPagamento)
+  });
+
+  if (!resposta.ok) {
+    alert("Erro ao gerar pagamento PIX.");
+    return;
+  }
+
+  const pagamento = await resposta.json();
+  const modal = mostrarQRCode(pagamento.point_of_interaction.transaction_data.qr_code_base64);
+  verificarPagamento(pagamento.id, dadosPedido, modal);
+}
+
 
   await carregarCarrinho();
 

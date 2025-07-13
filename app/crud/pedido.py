@@ -1,8 +1,10 @@
 from sqlalchemy.orm import Session
 from app import models, schemas
-from services.pagamento import gerar_pix
+from app.services.pagamento import gerar_pix
+from app.schemas.pedido import PedidoCreate
 
-def criar_pedido(db: Session, usuario_id: int, pedido: schemas.PedidoCreate, usuario):
+
+def criar_pedido(db: Session, usuario_id: int, pedido: PedidoCreate, usuario):
     novo_pedido = models.Pedido(
         usuario_id=usuario_id,
         endereco=pedido.endereco,

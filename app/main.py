@@ -4,10 +4,8 @@ from app import database
 from app.routes import cart as routes_cart, user as routes_user, perfume as routes_perfume, pedido as routes_pedido, avaliacao as routes_avaliacao
 from app.models import perfume as models_perfume, user as models_user, avaliacao as models_avaliacao
 from fastapi.middleware.cors import CORSMiddleware
-from routes import pagamento
-
-from routes.pagamento import router as pagamento_router
-
+from app.routes import pagamento
+from app.routes.pagamento import router as pagamento_router
 
 
 # Cria as tabelas no banco
