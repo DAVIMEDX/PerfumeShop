@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     // Carrega os dados do perfume
-    const response = await fetch(`http://localhost:8000/perfumes/${perfumeId}`);
+    const response = await fetch(http://localhost:8000/perfumes/${perfumeId});
     if (!response.ok) throw new Error('Perfume não encontrado');
 
     const perfume = await response.json();
@@ -23,17 +23,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.titulo-produto').textContent = perfume.nome;
     document.querySelector('.imagem-produto img').src = perfume.imagem_url;
     document.querySelector('.imagem-produto img').alt = perfume.nome;
-    document.querySelector('.preco-atual').textContent = `R$ ${perfume.preco.toFixed(2)}`;
+    document.querySelector('.preco-atual').textContent = R$ ${perfume.preco.toFixed(2)};
     document.querySelector('.descricao-curta').textContent = perfume.descricao;
 
     // Configura o link de avaliações para incluir o ID do perfume
     const botaoAvaliacoes = document.querySelector('.botao-avaliacao');
-    botaoAvaliacoes.href = `avaliacoes.html?id=${perfume.id}`;
+    botaoAvaliacoes.href = avaliacoes.html?id=${perfume.id};
 
     // Atualiza contador do carrinho (se houver itens)
     const carrinhoResponse = await fetch('http://localhost:8000/carrinho', {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': Bearer ${localStorage.getItem('token')}
       }
     });
     
@@ -43,10 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // Evento para adicionar ao carrinho
-  document.querySelector('.botao-carrinho').addEventListener('click', async (e) => {
-    e.preventDefault(); // Impede que o <a> redirecione automaticamente
-    await adicionarAoCarrinho(perfume.id);
-  });
+    document.querySelector('.botao-carrinho').addEventListener('click', () => {
+      adicionarAoCarrinho(perfume.id);
+    });
 
     // Evento para o ícone do carrinho no header
     botaoCarrinhoHeader.addEventListener('click', (e) => {
@@ -74,7 +73,7 @@ async function adicionarAoCarrinho(perfumeId) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        'Authorization': Bearer ${token}
       },
       body: JSON.stringify({
         perfume_id: perfumeId,
