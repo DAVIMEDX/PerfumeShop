@@ -1,28 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Detalhes do Perfume</title>
-  <link rel="stylesheet" href="/css/detalhes.css" />
-</head>
-<body>
-  <header>
-    <h2>Perfume Shop</h2>
-    <nav>
-      <a href="/html/home.html">Início</a>
-      <a href="/html/catalogo.html">Shop</a>
-      <a href="/html/carrinho.html">Carrinho</a>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfume Essence | Perfume Shop</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="detalhes.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <div class="logo">Perfume Shop</div>
+      <nav class="navegacao">
+        <a href="#">Início</a>
+        <a href="#">Produtos</a>
+        <a href="#">Avaliações</a>
+        <a href="#">Contato</a>
+      </nav>
+      <div class="acoes-usuario">
+        <a href="#" class="login">Login</a>
+        <a href="#" class="destaque">Cadastre-se</a>
+      </div>
+    </header>
 
-  <section class="catalogo">
-    <p>Carregando detalhes do perfume...</p>
-  </section>
+    <main class="conteudo-principal">
+      <div class="produto-simples">
+        <div class="imagem-produto">
+          <img src="https://via.placeholder.com/400" alt="Perfume Essence" />
+        </div>
+        <div class="info-simples">
+          <h1 class="titulo-produto">Perfume Essence</h1>
+          <div class="preco-produto">
+            <span class="preco-atual">R$ 249,90</span>
+            <span class="preco-antigo">R$ 299,90</span>
+            <span class="desconto">5% OFF</span>
+          </div>
+          <p class="descricao-curta">
+            Fragrância exclusiva com notas de jasmim, baunilha e âmbar.
+          </p>
 
-  <footer>
-    <p>© Perfume Shop</p>
-  </footer>
+          <div class="botoes-acao">
+            <button class="botao-carrinho">Adicionar ao Carrinho</button>
+            <a href="avaliacoes.html" class="botao-avaliacao">Ver Avaliações</a>
+          </div>
+        </div>
+      </div>
+    </main>
 
-  <script src="/js/detalhes.js"></script>
-</body>
+    <script src="detalhes.js"></script>
+  </body>
 </html>
