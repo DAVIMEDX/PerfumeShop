@@ -14,48 +14,60 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     // Carrega os dados do perfume
-    const response = await fetch(http://localhost:8000/perfumes/${perfumeId});
+    const response = await fetch(`http://localhost:8000/perfumes/${perfumeId}`);
     if (!response.ok) throw new Error('Perfume não encontrado');
 
     const perfume = await response.json();
 
     // Atualiza a página com os dados do perfume
-    document.querySelector('.titulo-produto').textContent = perfume.nome;
-    document.querySelector('.imagem-produto img').src = perfume.imagem_url;
-    document.querySelector('.imagem-produto img').alt = perfume.nome;
-    document.querySelector('.preco-atual').textContent = R$ ${perfume.preco.toFixed(2)};
-    document.querySelector('.descricao-curta').textContent = perfume.descricao;
-
-    // Configura o link de avaliações para incluir o ID do perfume
+    const tituloProduto = document.querySelector('.titulo-produto');
+    const imagemProduto = document.querySelector('.imagem-produto img');
+    const precoAtual = document.querySelector('.preco-atual');
+    const descricaoCurta = document.querySelector('.descricao-curta');
     const botaoAvaliacoes = document.querySelector('.botao-avaliacao');
-    botaoAvaliacoes.href = avaliacoes.html?id=${perfume.id};
+
+    if (tituloProduto) tituloProduto.textContent = perfume.nome;
+    if (imagemProduto) {
+      imagemProduto.src = perfume.imagem_url;
+      imagemProduto.alt = perfume.nome;
+    }
+    if (precoAtual) precoAtual.textContent = `R$ ${perfume.preco.toFixed(2)}`;
+    if (descricaoCurta) descricaoCurta.textContent = perfume.descricao;
+    if (botaoAvaliacoes) botaoAvaliacoes.href = `avaliacoes.html?id=${perfume.id}`;
 
     // Atualiza contador do carrinho (se houver itens)
     const carrinhoResponse = await fetch('http://localhost:8000/carrinho', {
       headers: {
-        'Authorization': Bearer ${localStorage.getItem('token')}
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
     });
     
-    if (carrinhoResponse.ok) {
+    if (carrinhoResponse.ok && contadorCarrinho) {
       const carrinho = await carrinhoResponse.json();
       contadorCarrinho.textContent = carrinho.itens.reduce((total, item) => total + item.quantidade, 0);
     }
 
     // Evento para adicionar ao carrinho
-    document.querySelector('.botao-carrinho').addEventListener('click', () => {
-      adicionarAoCarrinho(perfume.id);
-    });
+    const botaoCarrinho = document.querySelector('.botao-carrinho');
+    if (botaoCarrinho) {
+      botaoCarrinho.addEventListener('click', () => {
+        adicionarAoCarrinho(perfume.id);
+      });
+    }
 
     // Evento para o ícone do carrinho no header
-    botaoCarrinhoHeader.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = '/html/carrinho.html';
-    });
+    if (botaoCarrinhoHeader) {
+      botaoCarrinhoHeader.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/html/carrinho.html';
+      });
+    }
 
   } catch (error) {
     console.error('Erro ao carregar perfume:', error);
-    produtoContainer.innerHTML = '<p>Erro ao carregar os detalhes do perfume.</p>';
+    if (produtoContainer) {
+      produtoContainer.innerHTML = '<p>Erro ao carregar os detalhes do perfume.</p>';
+    }
   }
 });
 
@@ -73,7 +85,7 @@ async function adicionarAoCarrinho(perfumeId) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': Bearer ${token}
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({
         perfume_id: perfumeId,
@@ -88,15 +100,21 @@ async function adicionarAoCarrinho(perfumeId) {
     const contador = document.querySelector('.contador-carrinho');
 
     // Feedback visual
-    botaoCarrinho.textContent = '✔️ Adicionado!';
-    botaoCarrinho.style.backgroundColor = '#4CAF50';
-    
+    if (botaoCarrinho) {
+      botaoCarrinho.textContent = '✔️ Adicionado!';
+      botaoCarrinho.style.backgroundColor = '#4CAF50';
+    }
+
     // Atualiza contador
-    contador.textContent = parseInt(contador.textContent || '0') + 1;
-    
+    if (contador) {
+      contador.textContent = (parseInt(contador.textContent || '0') + 1).toString();
+    }
+
     setTimeout(() => {
-      botaoCarrinho.textContent = 'Adicionar ao Carrinho';
-      botaoCarrinho.style.backgroundColor = '';
+      if (botaoCarrinho) {
+        botaoCarrinho.textContent = 'Adicionar ao Carrinho';
+        botaoCarrinho.style.backgroundColor = '';
+      }
     }, 2000);
 
   } catch (error) {
