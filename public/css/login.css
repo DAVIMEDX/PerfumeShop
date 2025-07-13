@@ -34,7 +34,7 @@ header {
   z-index: 1000;
 }
 
-nav {
+nav a{
   margin: 0 1rem;
   text-decoration: none;
   color: var(--cor-principal);
