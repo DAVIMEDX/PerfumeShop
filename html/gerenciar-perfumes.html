@@ -20,57 +20,8 @@
     <a href="/html/admin.html" class="btn-link">Voltar ao Painel</a>
   </section>
 
-  <script>
-    if (localStorage.getItem("adminLogado") !== "true") {
-      alert("Acesso restrito. Faça login como administrador.");
-      window.location.href = "login-admin.html";
-    }
+  <script src="/js/gerenciar-perfumes.js"></script>
 
-    const perfumes = JSON.parse(localStorage.getItem("perfumes")) || [];
-    const lista = document.getElementById("lista-perfumes");
-
-    function renderizarPerfumes() {
-      lista.innerHTML = "";
-
-      if (perfumes.length === 0) {
-        lista.innerHTML = "<p>Nenhum perfume cadastrado ainda.</p>";
-        return;
-      }
-
-      perfumes.forEach((perfume, index) => {
-        const div = document.createElement("div");
-        div.className = "perfume-card";
-
-        div.innerHTML = `
-          <h2>${perfume.nome}</h2>
-          <p><strong>Descrição:</strong> ${perfume.descricao}</p>
-          <p><strong>Preço:</strong> R$ ${perfume.preco.toFixed(2)}</p>
-          <p><strong>Imagem:</strong> <a href="${perfume.imagem}" target="_blank" rel="noopener noreferrer">Ver imagem</a></p>
-          <div class="btn-group">
-            <button class="btn btn-editar" onclick="editarPerfume(${index})">Editar</button>
-            <button class="btn btn-remover" onclick="removerPerfume(${index})">Remover</button>
-          </div>
-        `;
-
-        lista.appendChild(div);
-      });
-    }
-
-    function editarPerfume(index) {
-      localStorage.setItem("editandoPerfumeIndex", index);
-      window.location.href = "editar-perfume.html";
-    }
-
-    function removerPerfume(index) {
-      if (confirm("Tem certeza que deseja remover este perfume?")) {
-        perfumes.splice(index, 1);
-        localStorage.setItem("perfumes", JSON.stringify(perfumes));
-        renderizarPerfumes();
-      }
-    }
-
-    renderizarPerfumes();
-  </script>
 </body>
 </html>
 
