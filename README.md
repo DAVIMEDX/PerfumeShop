@@ -81,7 +81,7 @@ Oferecer uma experiência de compra eficiente, moderna e segura, tanto para clie
 
 ## 🗂️ Estrutura do Projeto
 
-\`\`\`
+```
 PerfumeShop/
 ├── public/
 │   ├── html/
@@ -94,7 +94,7 @@ PerfumeShop/
 │   └── models/ (SQLAlchemy)
 └── docs/
     └── Trabalho de ES.pdf
-\`\`\`
+```
 
 ---
 
@@ -102,23 +102,23 @@ PerfumeShop/
 
 1. **Clone o repositório:**
 
-\`\`\`bash
+```
 git clone https://github.com/DAVIMEDX/PerfumeShop.git
-\`\`\`
+```
 
 2. **Acesse a pasta e inicie o frontend:**
 
-\`\`\`bash
+```
 cd PerfumeShop/public
-# Abrir o arquivo index.html em um navegador
-\`\`\`
+#Abrir o arquivo index.html em um navegador
+```
 
 3. **(Opcional) Rodar backend com FastAPI:**
 
-\`\`\`bash
+```
 cd backend
 uvicorn main:app --reload
-\`\`\`
+```
 
 ---
 
