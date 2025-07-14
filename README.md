@@ -62,7 +62,7 @@ Oferecer uma experiência de compra eficiente, moderna e segura, tanto para clie
 
 ## 🧪 Testes
 
-- Casos de uso descritos no [PDF do projeto](./docs/Trabalho%20de%20ES.pdf).
+- Casos de uso descritos no [PDF do projeto](https://github.com/DAVIMEDX/PerfumeShop/blob/main/Trabalho%20de%20ES%20final.pdf).
 - Testes manuais validados a partir dos fluxos no frontend.
 - Cobertura de funcionalidades do CRUD e autenticação.
 
