@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       adicionarEventos();
     } catch (error) {
       console.error(error);
-      produtosContainer.innerHTML = '<p>Erro ao carregar carrinho.</p>';
+      produtosContainer.innerHTML = '<p>Erro ao carregar carrinho, ou carrinho vazio.</p>';
     }
   }
 

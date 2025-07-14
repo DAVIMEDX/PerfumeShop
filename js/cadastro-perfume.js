@@ -12,12 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = 'login-admin.html';
       return;
     }
+    
+
 
     const nome = document.getElementById('nome').value;
-    const marca = 'Marca Padrão'; 
+    const marca = document.getElementById('marca').value; 
     const preco = parseFloat(document.getElementById('preco').value);
-    const estoque = 10; 
-    const volume = '100ml';
+    const estoque = parseInt(document.getElementById('estoque').value);
+    const volume = document.getElementById('volume').value;
     const descricao = document.getElementById('descricao').value;
     const imagem_url = document.getElementById('imagem').value;
 

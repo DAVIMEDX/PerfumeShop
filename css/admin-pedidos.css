@@ -53,16 +53,18 @@ header h2 {
 
 /* Estilo do main */
 main {
-  max-width: 350px !important; /* Reduzido para 350px, com !important para forçar */
-  width: 80%; /* Flexível para telas menores */
+  max-width: 700px; /* Aumentei para caber tabela maior */
+  width: 90%; /* Mantém responsivo */
   margin: 1.5rem auto;
   padding: 1.5rem;
   background: var(--cor-secundaria);
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border-top: 4px solid var(--cor-botao);
-  border: 1px solid red; /* Borda temporária para depuração */
+  /* border: 1px solid red;  remover esta linha */
+  overflow-x: auto; /* Permite scroll horizontal se necessário */
 }
+
 
 /* Estilo do h1 */
 main h1 {
@@ -86,14 +88,13 @@ main h1 {
 
 #tabela-pedidos th,
 #tabela-pedidos td {
-  padding: 0.5rem; /* Reduzido para compactar */
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  min-width: 60px; /* Colunas ainda menores */
-  max-width: 100px; /* Limite rígido */
+  padding: 0.75rem 1rem; /* um pouco mais espaçado */
+  min-width: auto; /* remove limite rígido */
+  max-width: none; /* deixa a largura livre */
+  white-space: nowrap; /* evita quebra dentro das células */
   overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all; /* Quebra textos longos */
+  text-overflow: ellipsis; /* mostra "..." para texto longo */
+  word-break: normal; /* quebra natural */
 }
 
 /* Estilo do cabeçalho da tabela */
@@ -169,13 +170,17 @@ main h1 {
     white-space: nowrap;
   }
 
-  #tabela-pedidos th,
+    #tabela-pedidos th,
   #tabela-pedidos td {
-    padding: 0.4rem;
-    min-width: 50px; /* Ainda menor em telas pequenas */
-    max-width: 90px;
-    word-break: break-all;
+    padding: 0.5rem 0.8rem;
+    min-width: 100px;
+    max-width: none;
+    word-break: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
 
   .btn-voltar {
     padding: 0.7rem 1.2rem;
