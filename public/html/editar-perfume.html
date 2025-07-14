@@ -32,53 +32,26 @@
         <input type="text" id="imagem" required />
       </div>
 
+      <div class="form-group">
+        <label for="marca">Marca</label>
+        <input type="text" id="marca" required />
+      </div>
+
+      <div class="form-group">
+        <label for="estoque">Estoque</label>
+        <input type="number" id="estoque" required />
+      </div>
+
+      <div class="form-group">
+        <label for="volume">Volume</label>
+        <input type="text" id="volume" required />
+      </div>
+
+
       <button type="submit" class="btn">Salvar Alterações</button>
     </form>
   </div>
 
-  <script>
-    const index = localStorage.getItem('editandoPerfumeIndex');
-    const perfumes = JSON.parse(localStorage.getItem('perfumes')) || [];
-    const mensagemErro = document.getElementById("mensagemErro");
-
-    if (index === null || !perfumes[index]) {
-      mensagemErro.textContent = "Perfume não encontrado. Redirecionando...";
-      setTimeout(() => {
-        window.location.href = "gerenciar-perfumes.html";
-      }, 2000);
-      document.getElementById('formEditarPerfume').style.display = 'none';
-    } else {
-      const perfume = perfumes[index];
-      document.getElementById('nome').value = perfume.nome;
-      document.getElementById('descricao').value = perfume.descricao;
-      document.getElementById('preco').value = perfume.preco;
-      document.getElementById('imagem').value = perfume.imagem;
-
-      document.getElementById('formEditarPerfume').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const nome = document.getElementById('nome').value.trim();
-        const descricao = document.getElementById('descricao').value.trim();
-        const preco = parseFloat(document.getElementById('preco').value);
-        const imagem = document.getElementById('imagem').value.trim();
-
-        if (!nome || !descricao || !preco || !imagem) {
-          mensagemErro.textContent = "Preencha todos os campos corretamente.";
-          return;
-        }
-
-        perfume.nome = nome;
-        perfume.descricao = descricao;
-        perfume.preco = preco;
-        perfume.imagem = imagem;
-
-        perfumes[index] = perfume;
-        localStorage.setItem('perfumes', JSON.stringify(perfumes));
-
-        alert("Perfume atualizado com sucesso!");
-        window.location.href = "gerenciar-perfumes.html";
-      });
-    }
-  </script>
+  <script src="/js/editar-perfume.js"></script>
 </body>
 </html>
