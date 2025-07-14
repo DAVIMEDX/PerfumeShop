@@ -60,9 +60,14 @@ async def receber_webhook(request: Request, db: Session = Depends(database.get_d
 
 
 @router.get("/pagamento/{pix_id}")
-async def status_pagamento(pix_id: str, token: str = Depends(oauth2_scheme)):
+async def status_pagamento(pix_id: str, db: Session = Depends(database.get_db), token: str = Depends(oauth2_scheme)):
     pagamento_info = verificar_status(pix_id)
     status_pagamento = pagamento_info.get("status")
+
     if not status_pagamento:
         raise HTTPException(status_code=404, detail="Pagamento não encontrado")
+    if status_pagamento == "approved":
+        crud.atualizar_status_pagamento(db, pix_id=pix_id, novo_status="pago")
+
     return {"status": status_pagamento}
+

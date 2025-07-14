@@ -1,6 +1,8 @@
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional
 from datetime import datetime
+from app.schemas.perfume import Perfume  
+from app.schemas.user import UsuarioOut
 
 class ItemPedidoBase(BaseModel):
     perfume_id: int
@@ -12,6 +14,7 @@ class ItemPedidoCreate(ItemPedidoBase):
 
 class ItemPedido(ItemPedidoBase):
     id: int
+    perfume: Perfume 
 
     class Config:
         from_attributes = True
@@ -25,15 +28,15 @@ class PedidoBase(BaseModel):
 
 class PedidoCreate(PedidoBase):
     itens: List[ItemPedidoCreate]
-    email: EmailStr  # ✅ necessário para geração do Pix (requerido pelo Mercado Pago)
+    email: EmailStr  
 
 class Pedido(PedidoBase):
     id: int
     criado_em: datetime
-    status: str  # ✅ novo campo
-    pix_id: Optional[str] = None  # ✅ novo campo
-    qr_code_base64: Optional[str] = None  # ✅ novo campo
+    status: str  
+    pix_id: Optional[str] = None  
+    qr_code_base64: Optional[str] = None  
     itens: List[ItemPedido]
-
+    usuario: Optional[UsuarioOut] = None 
     class Config:
         from_attributes = True

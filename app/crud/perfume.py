@@ -46,5 +46,5 @@ def deletar_perfume(db: Session, perfume_id: int):
     db.delete(perfume)
     db.commit()
 
-def listar_todos_pedidos(db: Session):
-    return db.query(models.Pedido).all()
+def listar_destaques(db: Session, limite: int = 4):
+    return db.query(models_perfume.Perfume).limit(limite).all()

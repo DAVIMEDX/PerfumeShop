@@ -8,6 +8,7 @@ class UsuarioCreate(BaseModel):
     nome: str
     email: EmailStr
     senha: str  # senha em texto plano na criação
+    is_admin: Optional[bool] = False
 
 # =========================
 # SAÍDA: Dados públicos do usuário (sem senha)
@@ -34,6 +35,12 @@ class UsuarioLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+class TokenComAdmin(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    is_admin: bool
+
 
 class TokenData(BaseModel):
     id: Optional[int] = None

@@ -2,10 +2,14 @@ from sqlalchemy.orm import Session
 from app import models, schemas
 from app.services.pagamento import gerar_pix
 from app.schemas.pedido import PedidoCreate
+from app.models import pedido as models_pedido
+from app.models.cart import Carrinho, ItemCarrinho
+from sqlalchemy.orm import Session, joinedload
+from app.models.pedido import Pedido, ItemPedido
 
 
 def criar_pedido(db: Session, usuario_id: int, pedido: PedidoCreate, usuario):
-    novo_pedido = models.Pedido(
+    novo_pedido = models_pedido.Pedido( 
         usuario_id=usuario_id,
         endereco=pedido.endereco,
         cidade=pedido.cidade,
@@ -15,11 +19,10 @@ def criar_pedido(db: Session, usuario_id: int, pedido: PedidoCreate, usuario):
         status="pendente"
     )
     db.add(novo_pedido)
-    db.flush()  # Para garantir que o novo_pedido.id exista
+    db.flush() 
 
-    # Salvar itens
     for item in pedido.itens:
-        item_db = models.ItemPedido(
+        item_db = models_pedido.ItemPedido(
             pedido_id=novo_pedido.id,
             perfume_id=item.perfume_id,
             quantidade=item.quantidade,
@@ -27,17 +30,26 @@ def criar_pedido(db: Session, usuario_id: int, pedido: PedidoCreate, usuario):
         )
         db.add(item_db)
 
-    # Usar o email real do usuário logado
     email_usuario = usuario.email
 
     resposta_pix = gerar_pix(valor=pedido.total, descricao="Compra Perfume Shop", email=email_usuario)
 
     novo_pedido.pix_id = resposta_pix.get("id")
     novo_pedido.qr_code_base64 = resposta_pix.get("point_of_interaction", {}).get("transaction_data", {}).get("qr_code_base64")
-
+    
     db.commit()
     db.refresh(novo_pedido)
+
+    carrinho = db.query(Carrinho).filter(Carrinho.usuario_id == usuario_id).first()
+    if carrinho:
+        db.query(ItemCarrinho).filter(ItemCarrinho.carrinho_id == carrinho.id).delete()
+        db.delete(carrinho)
+
+    db.commit()
+
     return novo_pedido
+
+
 
 def atualizar_status_pagamento(db: Session, pix_id: str, novo_status: str):
     pedido = db.query(models.Pedido).filter(models.Pedido.pix_id == pix_id).first()
@@ -45,3 +57,10 @@ def atualizar_status_pagamento(db: Session, pix_id: str, novo_status: str):
         pedido.status = novo_status
         db.commit()
     return pedido
+
+def listar_todos_pedidos(db: Session):
+    return db.query(Pedido)\
+        .options(
+            joinedload(Pedido.usuario),             
+            joinedload(Pedido.itens).joinedload(ItemPedido.perfume) 
+        ).all()

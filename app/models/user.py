@@ -13,5 +13,4 @@ class Usuario(Base):
     carrinho = relationship("Carrinho", back_populates="usuario",uselist=False)
     pedidos = relationship("Pedido", back_populates="usuario")
     avaliacoes = relationship("Avaliacao", back_populates="usuario", cascade="all, delete")
-
 from app.models.pedido import Pedido

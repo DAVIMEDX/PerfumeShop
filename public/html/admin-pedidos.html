@@ -18,47 +18,6 @@
 
       <a href="admin.html" class="btn-voltar">Voltar ao Painel</a>
     </main>
-
-    <script>
-      if (localStorage.getItem("adminLogado") !== "true") {
-        alert("Acesso restrito. Faça login como administrador.");
-        window.location.href = "login-admin.html";
-      }
-
-      const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
-      const tabelaPedidos = document.getElementById("tabela-pedidos");
-
-      if (pedidos.length === 0) {
-        tabelaPedidos.innerHTML =
-          "<p class='sem-pedidos'>Nenhum pedido foi realizado ainda.</p>";
-      } else {
-        let tabelaHTML = `
-          <table>
-            <thead>
-              <tr>
-                <th>Cliente</th>
-                <th>Endereço</th>
-                <th>Pagamento</th>
-                <th>Itens</th>
-              </tr>
-            </thead>
-            <tbody>
-        `;
-
-        pedidos.forEach((pedido) => {
-          tabelaHTML += `
-            <tr>
-              <td>${pedido.nomeCliente || "Desconhecido"}</td>
-              <td>${pedido.endereco || "-"}</td>
-              <td>${pedido.pagamento || "-"}</td>
-              <td>${pedido.itens ? pedido.itens.join(", ") : "-"}</td>
-            </tr>
-          `;
-        });
-
-        tabelaHTML += "</tbody></table>";
-        tabelaPedidos.innerHTML = tabelaHTML;
-      }
-    </script>
+    <script src="/js/visualizar-pedidos-admin.js"></script>
   </body>
 </html>

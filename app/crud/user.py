@@ -25,7 +25,8 @@ def criar_usuario(db: Session, usuario: schemas_user.UsuarioCreate):
     db_usuario = models_user.Usuario(
         nome=usuario.nome,
         email=usuario.email,
-        senha=senha_hash
+        senha=senha_hash,
+        is_admin=getattr(usuario, "is_admin", False)
     )
     db.add(db_usuario)
     db.commit()

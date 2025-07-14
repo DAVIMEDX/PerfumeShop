@@ -35,14 +35,14 @@ def cadastrar_usuario(usuario: schemas_user.UsuarioCreate, db: Session = Depends
 # ============================
 # LOGIN
 # ============================
-@router.post("/login", response_model=schemas_user.Token)
+@router.post("/login", response_model=schemas_user.TokenComAdmin)
 def login_usuario(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     usuario = crud_user.buscar_usuario_por_email(db, form_data.username)
     if not usuario or not crud_user.verify_password(form_data.password, usuario.senha):
         raise HTTPException(status_code=401, detail="Email ou senha inválidos")
     
     token = auth.criar_token({"sub": str(usuario.id)})
-    return {"access_token": token, "token_type": "bearer"}
+    return {"access_token": token, "token_type": "bearer","is_admin": usuario.is_admin }
 
 
 # ============================
