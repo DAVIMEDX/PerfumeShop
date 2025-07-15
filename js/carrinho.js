@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function carregarCarrinho() {
     try {
-      const response = await fetch('http://localhost:8000/carrinho/itens', {
+      const response = await fetch('/api/carrinho/itens', {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       btn.addEventListener('click', async () => {
         const itemId = btn.getAttribute('data-id');
         try {
-          const res = await fetch(`http://localhost:8000/carrinho/${itemId}`, {
+          const res = await fetch(`/api/carrinho/${itemId}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
           });
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (novaQuantidade < 1) return;
 
         try {
-          const res = await fetch(`http://localhost:8000/carrinho/${itemId}`, {
+          const res = await fetch(`/api/carrinho/${itemId}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       tentativas++;
 
       try {
-        const resp = await fetch(`http://localhost:8000/pagamento/${pixId}`, {
+        const resp = await fetch(`/api/pagamento/${pixId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   async function criarPedido(dadosPedido) {
     console.log("Dados do pedido a enviar:", dadosPedido);
-    const resposta = await fetch('http://localhost:8000/pedidos', {
+    const resposta = await fetch('/api/pedidos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const cidade = document.getElementById('cidade').value;
   const cep = document.getElementById('cep').value;
 
-  const respCarrinho = await fetch('http://localhost:8000/carrinho/itens', {
+  const respCarrinho = await fetch('/api/carrinho/itens', {
     headers: { Authorization: `Bearer ${token}` }
   });
 
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 };
 
 
-  const resposta = await fetch('http://localhost:8000/pagamento/pix', {
+  const resposta = await fetch('/api/pagamento/pix', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

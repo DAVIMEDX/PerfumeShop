@@ -16,7 +16,7 @@ if (!id) {
 
   async function carregarPerfume() {
     try {
-      const response = await fetch(`http://localhost:8000/perfumes/${id}`);
+      const response = await fetch(`/api/perfumes/${id}`);
       if (!response.ok) throw new Error("Erro ao buscar perfume.");
 
       const perfume = await response.json();
@@ -54,7 +54,7 @@ if (!id) {
     const token = localStorage.getItem("token");
 
     try {
-      const resposta = await fetch(`http://localhost:8000/perfumes/${id}`, {
+      const resposta = await fetch(`/api/perfumes/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('lista-produtos');
 
   try {
-    const response = await fetch('http://localhost:8000/perfumes/');
+    const response = await fetch('/api/perfumes/');
     if (!response.ok) throw new Error('Erro ao buscar perfumes');
 
     const perfumes = await response.json();

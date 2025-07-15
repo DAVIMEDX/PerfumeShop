@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/perfumes/', {
+      const response = await fetch('/api/perfumes/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

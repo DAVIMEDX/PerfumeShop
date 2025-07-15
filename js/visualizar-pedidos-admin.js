@@ -8,7 +8,7 @@ const token = localStorage.getItem("token");
 
 async function carregarPedidos() {
   try {
-    const response = await fetch("http://localhost:8000/admin/pedidos", {
+    const response = await fetch("/api/admin/pedidos", {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.ok) throw new Error("Erro ao buscar pedidos");

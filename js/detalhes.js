@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     // Carrega os dados do perfume
-    const response = await fetch(`http://localhost:8000/perfumes/${perfumeId}`);
+    const response = await fetch(`/api/perfumes/${perfumeId}`);
     if (!response.ok) throw new Error('Perfume não encontrado');
 
     const perfume = await response.json();
@@ -70,7 +70,7 @@ async function atualizarContadorCarrinho() {
   if (!token || !contador) return;
 
   try {
-    const carrinhoResponse = await fetch('http://localhost:8000/carrinho/itens', {
+    const carrinhoResponse = await fetch('/api/carrinho/itens', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -95,7 +95,7 @@ async function adicionarAoCarrinho(perfumeId) {
   }
 
   try {
-    const response = await fetch('http://localhost:8000/carrinho/adicionar', {
+    const response = await fetch('/api/carrinho/adicionar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ if (localStorage.getItem("adminLogado") !== "true") {
 
   async function carregarPerfumes() {
     try {
-      const response = await fetch("http://localhost:8000/perfumes/");
+      const response = await fetch("/api/perfumes/");
       if (!response.ok) throw new Error("Erro ao buscar perfumes");
 
       const perfumes = await response.json();
@@ -57,7 +57,7 @@ if (localStorage.getItem("adminLogado") !== "true") {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch(`http://localhost:8000/perfumes/${id}`, {
+      const response = await fetch(`/api/perfumes/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`

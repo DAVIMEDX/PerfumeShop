@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/avaliacoes", {
+      const response = await fetch("/api/avaliacoes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Carrega avaliações do banco
   async function carregarAvaliacoes() {
     try {
-      const response = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}`);
+      const response = await fetch(`/api/avaliacoes/perfume/${perfumeId}`);
       if (!response.ok) throw new Error("Erro ao carregar avaliações.");
 
       const avaliacoes = await response.json();
@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const contagemAvaliacoes = document.querySelector(".contagem-avaliacoes");
 
     try {
-      const responseLista = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}`);
-      const responseMedia = await fetch(`http://localhost:8000/avaliacoes/perfume/${perfumeId}/media`);
+      const responseLista = await fetch(`/api/avaliacoes/perfume/${perfumeId}`);
+      const responseMedia = await fetch(`/api/avaliacoes/perfume/${perfumeId}/media`);
 
       if (!responseLista.ok || !responseMedia.ok) throw new Error("Erro ao buscar dados");
 
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!perfumeId) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/perfumes/${perfumeId}`);
+      const response = await fetch(`/api/perfumes/${perfumeId}`);
       if (!response.ok) throw new Error("Erro ao carregar detalhes do perfume.");
 
       const perfume = await response.json();

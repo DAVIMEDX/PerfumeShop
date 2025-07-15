@@ -8,7 +8,7 @@ document.getElementById('cadastroForm').addEventListener('submit', async functio
   const senha = document.getElementById('senhaCadastro').value;
 
   try {
-    const response = await fetch('http://localhost:8000/usuarios/', {
+    const response = await fetch('/api/usuarios/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
