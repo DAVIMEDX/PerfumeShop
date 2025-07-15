@@ -40,7 +40,7 @@ nav a {
 /* FOCO PADRÃO DO NAVEGADOR (sem alterações) */
 
 .hero {
-  background: url('img/banner1.jpg') no-repeat center center;
+  background: url('../img/banner1.jpg') no-repeat center center;
   background-size: cover;
   text-align: center;
   padding: 8rem 2rem;
