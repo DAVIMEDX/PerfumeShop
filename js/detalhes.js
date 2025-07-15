@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     if (precoAtual) precoAtual.textContent = `R$ ${perfume.preco.toFixed(2)}`;
     if (descricaoCurta) descricaoCurta.textContent = perfume.descricao;
-    if (botaoAvaliacoes) botaoAvaliacoes.href = `avaliacao.html?id=${perfume.id}`;
+    if (botaoAvaliacoes) botaoAvaliacoes.href = `avaliacao.?id=${perfume.id}`;
 
     // Atualiza contador do carrinho (se houver itens)
     await atualizarContadorCarrinho();
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       botaoCarrinho.addEventListener('click', async (event) => {
         event.preventDefault(); // previne o redirecionamento imediato
         await adicionarAoCarrinho(perfume.id);
-        window.location.href = '/html/carrinho.html'; // redireciona só depois de adicionar
+        window.location.href = 'html/carrinho.html'; // redireciona só depois de adicionar
       });
     }
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (botaoCarrinhoHeader) {
       botaoCarrinhoHeader.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = '/html/carrinho.html';
+        window.location.href = 'html/carrinho.html';
       });
     }
 
@@ -90,7 +90,7 @@ async function adicionarAoCarrinho(perfumeId) {
 
   if (!token) {
     alert('Você precisa estar logado para adicionar ao carrinho.');
-    window.location.href = '/html/login.html';
+    window.location.href = 'html/login.html';
     return;
   }
 
