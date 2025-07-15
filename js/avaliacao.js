@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!token) {
     alert("Você precisa estar logado para acessar essa página.");
-    window.location.href = "/html/login.html"; 
+    window.location.href = "html/login.html"; 
     return; 
   }
 
