@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!token) {
     alert('Usuário não autenticado. Faça login.');
-    window.location.href = 'html/login.html';
+    window.location.href = 'login.html';
     return;
   }
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     alert("Pedido finalizado com sucesso!");
-    window.location.href = 'index.html';
+    window.location.href = '../index.html';
   }
 
  async function finalizarPedido() {
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const email = localStorage.getItem('email');
   if (!email) {
     alert("Email do usuário não encontrado. Faça login novamente.");
-    window.location.href = 'html/login.html';
+    window.location.href = 'login.html';
     return;
   }
 

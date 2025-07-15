@@ -22,7 +22,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       alert('Login realizado com sucesso!');
       localStorage.setItem('token', data.access_token);
       localStorage.setItem('email', email);  
-      window.location.href = 'index.html';
+      window.location.href = '../index.html';
     } else {
       const error = await response.json();
       alert('Erro no login: ' + (error.detail || 'Email ou senha inválidos'));
