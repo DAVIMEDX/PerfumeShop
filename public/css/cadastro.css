@@ -1,0 +1,238 @@
+/* cadastro.css */
+
+/* Definir variáveis CSS (copiado do catalogo.css) */
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-botao: #223A5E;
+  --cor-fundo: #d4c099;
+  --fonte-titulo: 'Playfair Display', serif;
+  --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+/* Estilo geral (copiado do catalogo.css) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-fundo);
+  color: var(--cor-principal);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilo do header (copiado do catalogo.css) */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 28px;
+  color: var(--cor-principal);
+  margin: 0;
+}
+
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: var(--cor-botao);
+}
+
+/* Estilo do formulário (ajustado para uma caixa branca menor) */
+.form-container {
+  padding: 1.5rem 1rem; /* Reduzido de 2rem 1rem para menos espaço interno */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--cor-secundaria); /* Fundo branco */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra */
+  max-width: 400px; /* Reduzido de 450px para 400px */
+  margin: 2rem auto; /* Mantém margem para afastar do header e footer */
+}
+
+.form-container h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.8rem; /* Reduzido de 2rem para um título mais compacto */
+  margin-bottom: 1rem;
+  color: var(--cor-principal);
+  text-align: center;
+  width: 100%;
+}
+
+.form-container form {
+  width: 100%;
+  padding: 0 1.5rem 1.5rem; /* Reduzido de 2rem para menos espaço */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem; /* Reduzido de 1rem para menos espaço */
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.4rem; /* Reduzido de 0.5rem */
+  color: var(--cor-principal);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  padding: 0.6rem 0.8rem; /* Reduzido de 0.8rem 1rem para campos menores */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem; /* Reduzido de 1rem */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--cor-botao);
+  box-shadow: 0 0 0 3px rgba(34, 58, 94, 0.2);
+}
+
+.form-container .btn {
+  width: 100%;
+  padding: 0.8rem; /* Reduzido de 1rem */
+  font-size: 1rem; /* Reduzido de 1.1rem */
+  margin-top: 0.8rem; /* Reduzido de 1rem */
+  margin-bottom: 0.8rem;
+  background-color: var(--cor-botao);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-container .btn:hover {
+  background-color: #0f2542;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.form-link a {
+  color: var(--cor-botao);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.form-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo do footer (copiado do catalogo.css) */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+footer div {
+  flex: 1;
+  min-width: 200px;
+}
+
+footer h4 {
+  font-family: var(--fonte-titulo);
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+footer p, footer a {
+  font-size: 14px;
+  color: #ccc;
+  margin: 5px 0;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--cor-botao);
+}
+
+/* Responsividade (adaptado do catalogo.css e forms.css) */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  nav a {
+    margin: 0.5rem 0;
+  }
+
+  .form-container {
+    padding: 1rem 0.8rem; /* Ainda menor em telas pequenas */
+    max-width: 90%; /* Ajusta para telas menores */
+  }
+
+  .form-container form {
+    padding: 0 1rem 1rem;
+  }
+
+  .form-container h1 {
+    font-size: 1.6rem; /* Reduzido de 1.8rem */
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .form-container .btn {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+}

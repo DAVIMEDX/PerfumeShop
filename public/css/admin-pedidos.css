@@ -1,0 +1,189 @@
+/* admin-pedidos.css */
+
+/* Variáveis CSS (consistente com login-admin.css e cadastro.css) */
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-botao: #223A5E;
+  --cor-fundo: #d4c099;
+  --cor-destaque: #107010; /* Mantido, mas não usado */
+  --fonte-titulo: 'Playfair Display', serif;
+  --fonte-corpo: 'Open Sans', sans-serif;
+}
+
+/* Estilo geral */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-fundo);
+  color: var(--cor-principal);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Estilo do header */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to right, #fefefe 30%, var(--cor-fundo) 70%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h2 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cor-principal);
+}
+
+/* Estilo do main */
+main {
+  max-width: 700px; /* Aumentei para caber tabela maior */
+  width: 90%; /* Mantém responsivo */
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: var(--cor-secundaria);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid var(--cor-botao);
+  /* border: 1px solid red;  remover esta linha */
+  overflow-x: auto; /* Permite scroll horizontal se necessário */
+}
+
+
+/* Estilo do h1 */
+main h1 {
+  font-family: var(--fonte-titulo);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--cor-principal);
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo da tabela de pedidos */
+#tabela-pedidos table {
+  width: 100%;
+  max-width: 100%; /* Evita expansão */
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#tabela-pedidos th,
+#tabela-pedidos td {
+  padding: 0.75rem 1rem; /* um pouco mais espaçado */
+  min-width: auto; /* remove limite rígido */
+  max-width: none; /* deixa a largura livre */
+  white-space: nowrap; /* evita quebra dentro das células */
+  overflow: hidden;
+  text-overflow: ellipsis; /* mostra "..." para texto longo */
+  word-break: normal; /* quebra natural */
+}
+
+/* Estilo do cabeçalho da tabela */
+#tabela-pedidos th {
+  background-color: var(--cor-botao);
+  color: white;
+  font-weight: 600;
+}
+
+#tabela-pedidos tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tabela-pedidos tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo da mensagem de sem pedidos */
+.sem-pedidos {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+/* Estilo do botão Voltar */
+.btn-voltar {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--cor-botao);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem auto 0;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #0f2542;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+
+  header h2 {
+    font-size: 1.4rem;
+  }
+
+  main {
+    margin: 1rem 1rem;
+    padding: 1rem;
+    max-width: 90% !important; /* Força ajuste */
+    width: 90%;
+  }
+
+  main h1 {
+    font-size: 1.6rem;
+  }
+
+  #tabela-pedidos table {
+    font-size: 0.85rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+    #tabela-pedidos th,
+  #tabela-pedidos td {
+    padding: 0.5rem 0.8rem;
+    min-width: 100px;
+    max-width: none;
+    word-break: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .btn-voltar {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}

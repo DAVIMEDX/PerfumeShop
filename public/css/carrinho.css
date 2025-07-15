@@ -1,0 +1,315 @@
+:root {
+  --cor-principal: #1f1f1f;
+  --cor-secundaria: #ffffff;
+  --cor-botao: #223a5e;
+  --cor-fundo: #d4c099;
+  --cor-destaque: #107010;
+  --cor-secundaria-texto: #8d4b4b;
+  --cor-borda: #9d7474;
+  --cor-sombra: rgba(0, 0, 0, 0.1);
+  --fonte-titulo: "Playfair Display", Arial;
+  --fonte-corpo: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: var(--fonte-corpo);
+  color: var(--cor-principal);
+  background-color: var(--cor-fundo);
+  margin: 0;
+  min-height: 100vh;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background: linear-gradient(to right, #fefefe 30%, #d4c099 70%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cor-principal);
+}
+
+.navegacao ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navegacao a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: bold;
+}
+
+.navegacao a:hover {
+  color: var(--cor-botao);
+}
+
+.acoes-usuario {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.acoes-usuario a {
+  text-decoration: none;
+  color: var(--cor-principal);
+  font-weight: 500;
+}
+
+.acoes-usuario .destaque {
+  background-color: var(--cor-botao);
+  color: var(--cor-secundaria);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.acoes-usuario .destaque:hover {
+  background-color: #1a2f4d;
+}
+
+.carrinho-container {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 4rem 2rem;
+  flex-wrap: wrap;
+}
+
+.carrinho-produtos {
+  flex: 1;
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  min-width: 300px;
+}
+
+.produto-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--cor-borda);
+  padding: 1rem 0;
+}
+
+.produto-carrinho img {
+  width: 80px;             
+  height: 80px;
+  object-fit: cover;      
+  border-radius: 8px;      
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.produto-carrinho .info {
+  flex: 1;
+}
+
+.produto-carrinho .preco {
+  text-align: right;
+}
+
+.produto-carrinho .preco s {
+  font-size: 0.8rem;
+  color: var(--cor-secundaria-texto);
+  display: block;
+}
+
+.produto-carrinho .preco span {
+  font-weight: bold;
+  color: var(--cor-destaque);
+}
+
+
+
+.btn {
+  background-color: var(--cor-botao);
+  color: var(--cor-secundaria);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: var(--fonte-corpo);
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #1a2f4d;
+}
+
+.subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: Arial;
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 1rem;
+  color: var(--cor-principal);
+}
+
+.info-box {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  background-color: var(--cor-secundaria);
+  padding: 1rem;
+  border-left: 5px solid var(--cor-botao);
+  color: var(--cor-principal);
+}
+
+.pagamento-metodos {
+  flex: 1;
+  background-color: var(--cor-secundaria);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--cor-sombra);
+  min-width: 300px;
+}
+
+.metodos-pagamento-form {
+  margin-top: 1rem;
+}
+
+.lista-metodos-pagamento {
+  list-style: none;
+  padding: 0;
+}
+
+.lista-metodos-pagamento li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.lista-metodos-pagamento label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  color: var(--cor-principal);
+}
+
+.lista-metodos-pagamento input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cor-botao);
+  cursor: pointer;
+}
+
+.lista-metodos-pagamento strong {
+  font-weight: Arial;
+}
+
+.total-box {
+  margin-top: 2rem;
+  background-color: var(--cor-secundaria);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--cor-principal);
+}
+
+.total-box p {
+  color: var(--cor-destaque);
+  font-weight: bold;
+}
+
+.total-box h3 {
+  margin: 0.5rem 0;
+  font-family: var(--fonte-titulo);
+}
+
+.total-box .btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  font-weight: Arial;
+}
+
+/* ✅ NOVO: Estilização dos campos de endereço */
+.metodos-pagamento-form input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid var(--cor-borda);
+  border-radius: 20px;
+  font-family: var(--fonte-corpo);
+  font-size: 0.95rem;
+  background-color: var(--cor-secundaria);
+  color: var(--cor-principal);
+  box-sizing: border-box;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.metodos-pagamento-form input[type="text"]:focus {
+  border-color: var(--cor-botao);
+  outline: none;
+  box-shadow: 0 0 5px var(--cor-sombra);
+}
+
+.desconto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--cor-destaque);
+  font-weight: bold;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--cor-principal);
+  border-top: 2px solid var(--cor-borda);
+  padding-top: 1rem;
+}
+.input-quantidade {
+  width: 60px;
+  padding: 0.4rem;
+  margin-top: 0.4rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--fonte-corpo);
+  background-color: var(--cor-secundaria);
+  color: var(--cor-principal);
+  text-align: center;
+}
+
+.input-quantidade:focus {
+  outline: none;
+  border-color: var(--cor-botao);
+  box-shadow: 0 0 5px var(--cor-sombra);
+}
+
+.btn-remover {
+  margin-top: 0.5rem;
+  display: inline-block;
+  background-color: #b42e2e;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-remover:hover {
+  background-color: #911f1f;
+}
