@@ -42,6 +42,10 @@ header {
   z-index: 1000;
 }
 
+header a {
+text-decoration: none;
+}
+
 header h2 {
   font-family: var(--fonte-titulo);
   font-size: 28px;
