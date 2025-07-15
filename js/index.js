@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.querySelector('.produto-lista');
 
     try {
-      const response = await fetch('http://localhost:8000/perfumes/destaques');
+     const response = await fetch('https://seu-backend.onrender.com/perfumes/destaques');
+        
       if (!response.ok) throw new Error('Erro ao buscar perfumes');
 
       const perfumes = await response.json();
