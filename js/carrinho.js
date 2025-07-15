@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!token) {
     alert('Usuário não autenticado. Faça login.');
-    window.location.href = '/html/login.html';
+    window.location.href = 'html/login.html';
     return;
   }
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const card = document.createElement('div');
         card.className = 'produto-carrinho';
-        card.innerHTML = `
+        card.inner = `
           <img src="${item.perfume.imagem_url}" alt="${item.perfume.nome}" />
           <div class="info">
             <strong>${item.perfume.nome}</strong><br>
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       adicionarEventos();
     } catch (error) {
       console.error(error);
-      produtosContainer.innerHTML = '<p>Erro ao carregar carrinho, ou carrinho vazio.</p>';
+      produtosContainer.inner = '<p>Erro ao carregar carrinho, ou carrinho vazio.</p>';
     }
   }
 
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     modal.style.alignItems = 'center';
     modal.style.zIndex = 9999;
 
-    modal.innerHTML = `
+    modal.inner = `
       <div style="background:#fff; padding:20px; border-radius:8px; text-align:center; max-width:320px;">
         <h2>Pague com PIX</h2>
         <img src="data:image/png;base64,${base64}" alt="QR Code PIX" style="width:250px; height:250px; margin-bottom:10px;" />
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     alert("Pedido finalizado com sucesso!");
-    window.location.href = 'home.html';
+    window.location.href = 'index.html';
   }
 
  async function finalizarPedido() {
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const email = localStorage.getItem('email');
   if (!email) {
     alert("Email do usuário não encontrado. Faça login novamente.");
-    window.location.href = '/html/login.html';
+    window.location.href = 'html/login.html';
     return;
   }
 
